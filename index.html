@@ -1,15 +1,13 @@
 <!doctype html>
 <html lang="id" class="h-full">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agen Perubahan SMP Negeri 30 Palembang</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -27,418 +25,176 @@
   </script>
   <style>
     html, body { height: 100%; margin: 0; }
-    .nav-active { border-bottom: 3px solid #1a56db; color: #1a56db; }
+    .nav-active { border-bottom: 3px solid #1a56db; color: #1a56db; font-weight: 700; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(26,86,219,0.15); }
-    .fade-in { animation: fadeIn 0.5s ease-in; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .quiz-option:hover { background: #e8f0fe; border-color: #1a56db; }
-    .quiz-option.selected { background: #1a56db; color: white; border-color: #1a56db; }
-    .quiz-option.correct { background: #10b981; color: white; border-color: #10b981; }
-    .quiz-option.wrong { background: #ef4444; color: white; border-color: #ef4444; }
   </style>
-  <style>body { box-sizing: border-box; }</style>
- </head>
- <body class="h-full font-poppins bg-white text-gray-800 overflow-auto">
-  <div id="app" class="w-full min-h-full flex flex-col"><!-- Header -->
-   <header class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-primary">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col items-center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvwy-JkYNzkb4HwpfXXV3lP8zgfMIo56b9X9fIbC5hwA&amp;s=10" alt="Logo SMP Negeri 30 Palembang" class="w-16 h-16 object-contain mb-1" loading="lazy" onerror="this.style.background='#1a56db';this.style.borderRadius='50%';this.alt='Logo';">
-     <h1 id="site-title" class="text-lg md:text-xl font-bold text-primary text-center">Agen Perubahan SMP Negeri 30 Palembang</h1>
-     <p class="text-xs text-gray-500">Didirikan Tahun 2026</p>
-    </div><!-- Navigation -->
-    <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-1 pb-1"><button onclick="showPage('home')" id="nav-home" class="nav-btn nav-active px-3 py-2 text-sm font-medium whitespace-nowrap transition-all">Beranda</button> <button onclick="showPage('materi')" id="nav-materi" class="nav-btn px-3 py-2 text-sm font-medium whitespace-nowrap transition-all text-gray-600">Materi</button> <button onclick="showPage('quiz')" id="nav-quiz" class="nav-btn px-3 py-2 text-sm font-medium whitespace-nowrap transition-all text-gray-600">Latihan Soal</button> <button onclick="showPage('statistik')" id="nav-statistik" class="nav-btn px-3 py-2 text-sm font-medium whitespace-nowrap transition-all text-gray-600">Statistik</button> <button onclick="showPage('tentang')" id="nav-tentang" class="nav-btn px-3 py-2 text-sm font-medium whitespace-nowrap transition-all text-gray-600">Tentang</button>
-    </nav>
-   </header><!-- Pages -->
-   <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-6"><!-- HOME -->
-    <div id="page-home" class="page fade-in">
-     <div class="bg-gradient-to-br from-primary to-accent rounded-2xl p-8 text-white mb-8">
-      <h2 class="text-2xl md:text-3xl font-bold mb-3">Selamat Datang!</h2>
-      <p class="text-blue-100 text-sm md:text-base leading-relaxed">Website Agen Perubahan SMP Negeri 30 Palembang hadir sebagai wadah edukasi dan informasi bagi seluruh siswa untuk menjadi pribadi yang lebih baik, bertanggung jawab, dan berkarakter.</p>
-     </div>
-     <div class="grid md:grid-cols-3 gap-4 mb-8">
-      <div class="bg-light rounded-xl p-5 card-hover transition-all border border-blue-100">
-       <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mb-3">
-        <i data-lucide="book-open" class="w-5 h-5 text-white"></i>
-       </div>
-       <h3 class="font-semibold text-primary mb-1">6 Materi Lengkap</h3>
-       <p class="text-xs text-gray-600">Video YouTube &amp; penjelasan tertulis</p>
+</head>
+<body class="h-full font-poppins bg-white text-gray-800 overflow-auto">
+  <div id="app" class="w-full min-h-full flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-primary">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col items-center">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvwy-JkYNzkb4HwpfXXV3lP8zgfMIo56b9X9fIbC5hwA&s=10" alt="Logo" class="w-14 h-14 object-contain mb-1">
+        <h1 class="text-base md:text-lg font-bold text-primary text-center uppercase tracking-tight">Agen Perubahan SMP Negeri 30 Palembang</h1>
       </div>
-      <div class="bg-light rounded-xl p-5 card-hover transition-all border border-blue-100">
-       <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mb-3">
-        <i data-lucide="pen-tool" class="w-5 h-5 text-white"></i>
-       </div>
-       <h3 class="font-semibold text-primary mb-1">20 Soal Latihan</h3>
-       <p class="text-xs text-gray-600">Uji pemahamanmu dengan skor nilai</p>
-      </div>
-      <div class="bg-light rounded-xl p-5 card-hover transition-all border border-blue-100">
-       <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mb-3">
-        <i data-lucide="bar-chart-2" class="w-5 h-5 text-white"></i>
-       </div>
-       <h3 class="font-semibold text-primary mb-1">Statistik Pengunjung</h3>
-       <p class="text-xs text-gray-600">Diagram garis &amp; batang interaktif</p>
-      </div>
-     </div><!-- Agen Perubahan Profiles -->
-     <h3 class="text-lg font-bold text-primary mb-4">Pembina Agen Perubahan</h3>
-     <div class="grid md:grid-cols-2 gap-4">
-      <div class="flex items-center gap-4 bg-light rounded-xl p-4 border border-blue-100"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjr2ocqhdhWQl8FuACcAe1cbwvdfY612vOvQU11gkQ3bGAKa_ojrWoG582PSuTkoqQ87J60NAlRGkwwCt8yqDTZaehOtdlylVRExd1viiz_98pV6DHmS6jamKlJNgo3cipaGBk86T7T7qjt1kA9IAUfWFdM_QlqQktz1Qa_lUxPxvVQiwuitcQgWygEB_EO" alt="Eni Ambarawati S.Psi" class="w-16 h-16 rounded-full object-cover border-2 border-primary" loading="lazy" onerror="this.style.background='#1a56db';this.alt='EA';">
-       <div>
-        <h4 class="font-semibold text-gray-800">Eni Ambarawati, S.Psi</h4>
-        <p class="text-xs text-gray-500">Pembina / Konselor</p>
-       </div>
-      </div>
-      <div class="flex items-center gap-4 bg-light rounded-xl p-4 border border-blue-100"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhzdFS-lK1WGJRCzRVSorlNov8sKDNQVt7pYXUUjfE5_vZnC_R6yQLJOI_Ka07bVVLh0piRxmHasrLo0FN6JwZRyc_5ys15xEZ1bwcM4jmsBz1kYfB1bWYv_S1xJIieqRV8y-mwWrAUiMkbVRs5XfFh_Ok-uNokW1PGCcDg-7a8hiib9R6KEDBIuicyDmq3" alt="Rusmina S.Pd" class="w-16 h-16 rounded-full object-cover border-2 border-primary" loading="lazy" onerror="this.style.background='#1a56db';this.alt='R';">
-       <div>
-        <h4 class="font-semibold text-gray-800">Rusmina, S.Pd</h4>
-        <p class="text-xs text-gray-500">Pembina / Guru</p>
-       </div>
-      </div>
-     </div>
-    </div><!-- MATERI -->
-    <div id="page-materi" class="page hidden fade-in">
-     <h2 class="text-2xl font-bold text-primary mb-6">Materi Edukasi</h2>
-     <div class="space-y-6" id="materi-list"><!-- Materi 1 -->
-      <div class="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden card-hover transition-all">
-       <div class="p-5"><span class="bg-primary text-white text-xs px-2 py-1 rounded-full">Materi 1</span>
-        <h3 class="text-lg font-bold mt-2 text-gray-800">Bullying</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">Bullying adalah tindakan agresif yang dilakukan secara berulang oleh seseorang atau sekelompok orang terhadap individu yang lebih lemah. Bullying dapat berupa fisik (memukul, mendorong), verbal (mengejek, mengancam), sosial (mengucilkan), maupun cyberbullying (melalui media sosial). Dampak bullying sangat serius: korban dapat mengalami depresi, kecemasan, penurunan prestasi akademik, hingga keinginan untuk menyakiti diri sendiri. Sebagai agen perubahan, kita harus berani melaporkan dan menghentikan bullying di lingkungan sekolah.</p>
-        <div class="mt-4 rounded-lg overflow-hidden bg-gray-100 aspect-video"><iframe width="100%" height="100%" src="https://youtu.be/am3sGO12f6Q?si=6fjWCS0v6Efnq8fd" title="Bullying" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-        </div>
-       </div>
-      </div><!-- Materi 2 -->
-      <div class="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden card-hover transition-all">
-       <div class="p-5"><span class="bg-primary text-white text-xs px-2 py-1 rounded-full">Materi 2</span>
-        <h3 class="text-lg font-bold mt-2 text-gray-800">Program Pemerintah: Siswa Harapan Emas</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">Program Siswa Harapan Emas adalah inisiatif pemerintah untuk menciptakan generasi muda yang unggul, berkarakter, dan berprestasi. Program ini mendorong siswa untuk aktif dalam kegiatan positif, mengembangkan potensi diri, serta menjadi teladan di lingkungan sekolah dan masyarakat. Melalui program ini, siswa didorong untuk memiliki etos kerja tinggi, disiplin, dan semangat belajar yang kuat demi masa depan Indonesia yang lebih cerah.</p>
-        <div class="mt-4 rounded-lg overflow-hidden bg-gray-100 aspect-video"><iframe width="100%" height="100%" src="https://youtu.be/QTto0d7Xjns?si=KD_XZp0z3CWXuVi5" title="Siswa Harapan Emas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-        </div>
-       </div>
-      </div><!-- Materi 3 -->
-      <div class="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden card-hover transition-all">
-       <div class="p-5"><span class="bg-primary text-white text-xs px-2 py-1 rounded-full">Materi 3</span>
-        <h3 class="text-lg font-bold mt-2 text-gray-800">Bahayanya Narkoba Untuk Kehidupan</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">Narkoba (Narkotika dan Obat-obatan Berbahaya) adalah zat yang sangat merusak tubuh dan pikiran. Penggunaan narkoba menyebabkan kerusakan otak, gangguan jantung, liver, dan sistem saraf. Secara sosial, pengguna narkoba kehilangan masa depan, hubungan keluarga, dan dapat terjerat hukum. Sebagai pelajar, kita harus tegas menolak narkoba dalam bentuk apapun dan berani mengatakan TIDAK pada ajakan yang membahayakan.</p>
-        <div class="mt-4 rounded-lg overflow-hidden bg-gray-100 aspect-video"><iframe width="100%" height="100%" src="https://youtu.be/ZhYszcLbDIo?si=l3DMNuvIST31mFAQ" title="Bahaya Narkoba" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-        </div>
-       </div>
-      </div><!-- Materi 4 -->
-      <div class="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden card-hover transition-all">
-       <div class="p-5"><span class="bg-primary text-white text-xs px-2 py-1 rounded-full">Materi 4</span>
-        <h3 class="text-lg font-bold mt-2 text-gray-800">Cara Menjadi Pemimpin yang Baik</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">Kepemimpinan yang baik dimulai dari kemampuan memimpin diri sendiri. Seorang pemimpin harus memiliki integritas, empati, keberanian mengambil keputusan, dan kemampuan berkomunikasi. Di sekolah, kepemimpinan bisa dipraktikkan melalui organisasi, kerja kelompok, dan menjadi teladan bagi teman-teman. Pemimpin sejati bukan yang ditakuti, melainkan yang dihormati karena sikap dan perbuatannya.</p>
-        <div class="mt-4 rounded-lg overflow-hidden bg-gray-100 aspect-video"><iframe width="100%" height="100%" src="https://youtu.be/2CFQaWtWqH4?si=qTf3pYjtoqMM1n8u" title="Kepemimpinan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-        </div>
-       </div>
-      </div><!-- Materi 5 -->
-      <div class="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden card-hover transition-all">
-       <div class="p-5"><span class="bg-primary text-white text-xs px-2 py-1 rounded-full">Materi 5</span>
-        <h3 class="text-lg font-bold mt-2 text-gray-800">Menjadi Siswa yang Bertanggung Jawab</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">Tanggung jawab adalah sikap menyadari dan melaksanakan kewajiban dengan sebaik-baiknya. Siswa yang bertanggung jawab mengerjakan tugas tepat waktu, menjaga kebersihan, menghormati guru dan teman, serta berani mengakui kesalahan. Tanggung jawab adalah fondasi karakter yang akan membentuk kesuksesan di masa depan. Mulailah dari hal kecil: datang tepat waktu, menepati janji, dan menyelesaikan apa yang sudah dimulai.</p>
-        <div class="mt-4 rounded-lg overflow-hidden bg-gray-100 aspect-video"><iframe width="100%" height="100%" src="https://youtu.be/CxCcBmxBGvk?si=cUdei8Ey2b09ZWZG" title="Tanggung Jawab" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-        </div>
-       </div>
-      </div><!-- Materi 6 -->
-      <div class="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden card-hover transition-all">
-       <div class="p-5"><span class="bg-primary text-white text-xs px-2 py-1 rounded-full">Materi 6</span>
-        <h3 class="text-lg font-bold mt-2 text-gray-800">Tugas Siswa Sebagai Pelajar (Portofolio Siswa)</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">Sebagai pelajar, tugas utama siswa adalah belajar dengan sungguh-sungguh, mengembangkan potensi diri, dan membangun portofolio yang menunjukkan pencapaian selama bersekolah. Portofolio siswa mencakup hasil karya, prestasi akademik dan non-akademik, serta dokumentasi kegiatan yang menunjukkan perkembangan diri. Portofolio ini penting untuk masa depan, baik melanjutkan pendidikan maupun memasuki dunia kerja.</p>
-        <div class="mt-4 rounded-lg overflow-hidden bg-gray-100 aspect-video"><iframe width="100%" height="100%" src="https://youtu.be/bYwM8NZKa9M?si=DKe-YKO3zkPvnuuR" title="Portofolio Siswa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div><!-- QUIZ -->
-    <div id="page-quiz" class="page hidden fade-in">
-     <h2 class="text-2xl font-bold text-primary mb-2">Latihan Soal</h2>
-     <p class="text-sm text-gray-500 mb-6">Jawab 20 soal berikut untuk menguji pemahamanmu!</p>
-     <div id="quiz-container">
-      <div id="quiz-progress" class="flex items-center gap-3 mb-4">
-       <div class="flex-1 bg-gray-200 rounded-full h-2">
-        <div id="progress-bar" class="bg-primary h-2 rounded-full transition-all" style="width:5%"></div>
-       </div><span id="progress-text" class="text-sm font-medium text-gray-600">1/20</span>
-      </div>
-      <div id="quiz-question" class="bg-light rounded-xl p-6 border border-blue-100 mb-4">
-       <p id="q-text" class="font-semibold text-gray-800 mb-4"></p>
-       <div id="q-options" class="space-y-2"></div>
-      </div>
-      <div id="quiz-nav" class="flex justify-between"><button onclick="prevQuestion()" id="btn-prev" class="px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40" disabled>Sebelumnya</button> <button onclick="nextQuestion()" id="btn-next" class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-accent">Selanjutnya</button>
-      </div>
-     </div>
-     <div id="quiz-result" class="hidden text-center py-10">
-      <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-       <i data-lucide="trophy" class="w-10 h-10 text-white"></i>
-      </div>
-      <h3 class="text-2xl font-bold text-primary mb-2">Hasil Kamu</h3>
-      <p id="score-text" class="text-4xl font-bold text-accent mb-2"></p>
-      <p id="score-desc" class="text-sm text-gray-500 mb-6"></p><button onclick="resetQuiz()" class="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:bg-accent">Ulangi Latihan</button>
-     </div>
-    </div><!-- STATISTIK -->
-    <div id="page-statistik" class="page hidden fade-in">
-     <h2 class="text-2xl font-bold text-primary mb-6">Statistik Pengunjung</h2>
-     <div class="grid md:grid-cols-3 gap-4 mb-6">
-      <div class="bg-light rounded-xl p-4 border border-blue-100 text-center">
-       <p class="text-2xl font-bold text-primary" id="stat-total">0</p>
-       <p class="text-xs text-gray-500">Total Pengunjung</p>
-      </div>
-      <div class="bg-light rounded-xl p-4 border border-blue-100 text-center">
-       <p class="text-2xl font-bold text-primary" id="stat-month">0</p>
-       <p class="text-xs text-gray-500">Bulan Ini</p>
-      </div>
-      <div class="bg-light rounded-xl p-4 border border-blue-100 text-center">
-       <p class="text-2xl font-bold text-primary" id="stat-today">0</p>
-       <p class="text-xs text-gray-500">Hari Ini</p>
-      </div>
-     </div>
-     <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl p-4 border border-blue-100 shadow-sm">
-       <h4 class="font-semibold text-sm text-gray-700 mb-3">Pengunjung Per Tahun (Diagram Garis)</h4>
-       <canvas id="chart-yearly"></canvas>
-      </div>
-      <div class="bg-white rounded-xl p-4 border border-blue-100 shadow-sm">
-       <h4 class="font-semibold text-sm text-gray-700 mb-3">Pengunjung Per Bulan 2026 (Diagram Batang)</h4>
-       <canvas id="chart-monthly"></canvas>
-      </div>
-      <div class="bg-white rounded-xl p-4 border border-blue-100 shadow-sm md:col-span-2">
-       <h4 class="font-semibold text-sm text-gray-700 mb-3">Pengunjung 7 Hari Terakhir (Diagram Garis)</h4>
-       <canvas id="chart-daily"></canvas>
-      </div>
-     </div>
-    </div><!-- TENTANG -->
-    <div id="page-tentang" class="page hidden fade-in">
-     <h2 class="text-2xl font-bold text-primary mb-6">Tentang Agen Perubahan</h2>
-     <div class="bg-light rounded-xl p-6 border border-blue-100 mb-6">
-      <p class="text-sm text-gray-700 leading-relaxed mb-4">Agen Perubahan SMP Negeri 30 Palembang adalah program yang bertujuan membentuk siswa-siswi yang berkarakter, berjiwa pemimpin, dan mampu memberikan dampak positif bagi lingkungan sekolah dan masyarakat.</p>
-      <p class="text-sm text-gray-700 leading-relaxed">Didirikan pada tahun <strong>2026</strong>, program ini dibimbing oleh guru-guru berdedikasi yang percaya bahwa setiap siswa memiliki potensi untuk menjadi agen perubahan yang membawa kebaikan.</p>
-     </div>
-     <h3 class="text-lg font-bold text-primary mb-4">Tim Pembina</h3>
-     <div class="grid md:grid-cols-2 gap-4">
-      <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm text-center"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjr2ocqhdhWQl8FuACcAe1cbwvdfY612vOvQU11gkQ3bGAKa_ojrWoG582PSuTkoqQ87J60NAlRGkwwCt8yqDTZaehOtdlylVRExd1viiz_98pV6DHmS6jamKlJNgo3cipaGBk86T7T7qjt1kA9IAUfWFdM_QlqQktz1Qa_lUxPxvVQiwuitcQgWygEB_EO" alt="Eni Ambarawati S.Psi" class="w-24 h-24 rounded-full object-cover mx-auto mb-3 border-3 border-primary" loading="lazy" onerror="this.style.background='#1a56db';">
-       <h4 class="font-bold text-gray-800">Eni Ambarawati, S.Psi</h4>
-       <p class="text-xs text-gray-500">Guru BK / Konselor Sekolah</p>
-      </div>
-      <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm text-center"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhzdFS-lK1WGJRCzRVSorlNov8sKDNQVt7pYXUUjfE5_vZnC_R6yQLJOI_Ka07bVVLh0piRxmHasrLo0FN6JwZRyc_5ys15xEZ1bwcM4jmsBz1kYfB1bWYv_S1xJIieqRV8y-mwWrAUiMkbVRs5XfFh_Ok-uNokW1PGCcDg-7a8hiib9R6KEDBIuicyDmq3" alt="Rusmina S.Pd" class="w-24 h-24 rounded-full object-cover mx-auto mb-3 border-3 border-primary" loading="lazy" onerror="this.style.background='#1a56db';">
-       <h4 class="font-bold text-gray-800">Rusmina, S.Pd</h4>
-       <p class="text-xs text-gray-500">Guru Pembina</p>
-      </div>
-     </div>
-    </div>
-   </main><!-- Footer -->
-   <footer class="bg-primary text-white text-center py-4 mt-auto">
-    <p class="text-xs">© 2026 Agen Perubahan SMP Negeri 30 Palembang. All Rights Reserved.</p>
-   </footer>
-  </div>
-  <script>
-    // === NAVIGATION ===
-    function showPage(page) {
-      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-      document.getElementById('page-' + page).classList.remove('hidden');
-      document.querySelectorAll('.nav-btn').forEach(b => { b.classList.remove('nav-active'); b.classList.add('text-gray-600'); });
-      document.getElementById('nav-' + page).classList.add('nav-active');
-      document.getElementById('nav-' + page).classList.remove('text-gray-600');
-      // Record visit
-      recordVisit(page);
-    }
+      <!-- Navigation -->
+      <nav class="max-w-7xl mx-auto px-4 flex overflow-x-auto justify-center gap-1 pb-1">
+        <button onclick="showPage('pembina')" id="nav-pembina" class="nav-btn nav-active px-3 py-2 text-sm whitespace-nowrap">Pembina</button>
+        <button onclick="showPage('home')" id="nav-home" class="nav-btn px-3 py-2 text-sm text-gray-600 whitespace-nowrap">Beranda</button>
+        <button onclick="showPage('perpus')" id="nav-perpus" class="nav-btn px-3 py-2 text-sm text-gray-600 whitespace-nowrap">Perpustakaan Digital</button>
+        <button onclick="showPage('statistik')" id="nav-statistik" class="nav-btn px-3 py-2 text-sm text-gray-600 whitespace-nowrap">Statistik</button>
+      </nav>
+    </header>
 
-    // === QUIZ DATA ===
-    const questions = [
-      { q: "Apa yang dimaksud dengan bullying?", options: ["Tindakan agresif berulang terhadap individu yang lebih lemah", "Bermain bersama teman", "Belajar kelompok", "Berolahraga bersama"], answer: 0 },
-      { q: "Berikut yang BUKAN termasuk jenis bullying adalah...", options: ["Bullying fisik", "Bullying verbal", "Bullying akademik", "Cyberbullying"], answer: 2 },
-      { q: "Apa dampak bullying bagi korban?", options: ["Menjadi lebih kuat", "Depresi dan penurunan prestasi", "Mendapat banyak teman", "Tidak ada dampak"], answer: 1 },
-      { q: "Program Siswa Harapan Emas bertujuan untuk...", options: ["Menciptakan generasi unggul dan berkarakter", "Memberikan uang kepada siswa", "Mengurangi jumlah sekolah", "Menghapus ujian"], answer: 0 },
-      { q: "Narkoba dapat menyebabkan kerusakan pada organ...", options: ["Rambut saja", "Otak, jantung, dan liver", "Kuku saja", "Tidak ada organ yang rusak"], answer: 1 },
-      { q: "Sikap yang benar terhadap ajakan menggunakan narkoba adalah...", options: ["Mencoba sedikit", "Menolak dengan tegas", "Mengikuti teman", "Diam saja"], answer: 1 },
-      { q: "Ciri pemimpin yang baik adalah...", options: ["Suka memerintah", "Memiliki integritas dan empati", "Tidak peduli orang lain", "Selalu ingin menang sendiri"], answer: 1 },
-      { q: "Kepemimpinan di sekolah bisa dipraktikkan melalui...", options: ["Bolos sekolah", "Organisasi dan kerja kelompok", "Mencontek", "Tidur di kelas"], answer: 1 },
-      { q: "Siswa yang bertanggung jawab akan...", options: ["Mengerjakan tugas tepat waktu", "Menyontek saat ujian", "Membolos sekolah", "Menyalahkan orang lain"], answer: 0 },
-      { q: "Tanggung jawab adalah sikap...", options: ["Menghindari kewajiban", "Menyadari dan melaksanakan kewajiban", "Menyerahkan tugas pada orang lain", "Tidak peduli"], answer: 1 },
-      { q: "Portofolio siswa mencakup...", options: ["Hasil karya dan prestasi", "Hanya nilai rapor", "Foto selfie saja", "Uang jajan"], answer: 0 },
-      { q: "Mengapa portofolio penting bagi siswa?", options: ["Untuk pamer", "Untuk masa depan pendidikan dan karir", "Tidak penting", "Hanya formalitas"], answer: 1 },
-      { q: "Agen perubahan adalah siswa yang...", options: ["Membawa dampak positif", "Suka membuat masalah", "Tidak peduli lingkungan", "Hanya mementingkan diri sendiri"], answer: 0 },
-      { q: "Cyberbullying dilakukan melalui...", options: ["Tatap muka", "Media sosial/internet", "Surat", "Telepati"], answer: 1 },
-      { q: "Langkah pertama jika melihat bullying adalah...", options: ["Ikut membully", "Melaporkan ke guru", "Merekam dan menyebarkan", "Mengabaikan"], answer: 1 },
-      { q: "Etos kerja tinggi artinya...", options: ["Malas bekerja", "Semangat dan disiplin dalam bekerja", "Bekerja sesuka hati", "Tidak mau belajar"], answer: 1 },
-      { q: "Pemimpin sejati adalah yang...", options: ["Ditakuti", "Dihormati karena sikap dan perbuatan", "Suka marah", "Tidak pernah salah"], answer: 1 },
-      { q: "Salah satu tugas utama siswa sebagai pelajar adalah...", options: ["Bermain sepanjang hari", "Belajar dengan sungguh-sungguh", "Tidur di kelas", "Mengganggu teman"], answer: 1 },
-      { q: "Dampak sosial penggunaan narkoba adalah...", options: ["Mendapat banyak teman", "Kehilangan masa depan dan hubungan keluarga", "Menjadi populer", "Tidak ada dampak"], answer: 1 },
-      { q: "Website Agen Perubahan SMPN 30 didirikan tahun...", options: ["2024", "2025", "2026", "2027"], answer: 2 }
-    ];
-
-    let currentQ = 0;
-    let userAnswers = new Array(20).fill(-1);
-
-    function renderQuestion() {
-      const q = questions[currentQ];
-      document.getElementById('q-text').textContent = (currentQ + 1) + ". " + q.q;
-      document.getElementById('progress-bar').style.width = ((currentQ + 1) / 20 * 100) + '%';
-      document.getElementById('progress-text').textContent = (currentQ + 1) + '/20';
-      const optDiv = document.getElementById('q-options');
-      optDiv.innerHTML = '';
-      q.options.forEach((opt, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz-option w-full text-left px-4 py-3 rounded-lg border border-gray-200 text-sm transition-all';
-        if (userAnswers[currentQ] === i) btn.classList.add('selected');
-        btn.textContent = String.fromCharCode(65 + i) + '. ' + opt;
-        btn.onclick = () => selectAnswer(i);
-        optDiv.appendChild(btn);
-      });
-      document.getElementById('btn-prev').disabled = currentQ === 0;
-      document.getElementById('btn-next').textContent = currentQ === 19 ? 'Selesai' : 'Selanjutnya';
-    }
-
-    function selectAnswer(i) {
-      userAnswers[currentQ] = i;
-      renderQuestion();
-    }
-
-    function nextQuestion() {
-      if (currentQ === 19) { showResult(); return; }
-      currentQ++;
-      renderQuestion();
-    }
-
-    function prevQuestion() {
-      if (currentQ > 0) { currentQ--; renderQuestion(); }
-    }
-
-    function showResult() {
-      let score = 0;
-      questions.forEach((q, i) => { if (userAnswers[i] === q.answer) score++; });
-      const pct = Math.round(score / 20 * 100);
-      document.getElementById('quiz-container').classList.add('hidden');
-      document.getElementById('quiz-result').classList.remove('hidden');
-      document.getElementById('score-text').textContent = score + '/20 (' + pct + '%)';
-      let desc = pct >= 80 ? 'Luar biasa! Kamu memahami materi dengan sangat baik! 🌟' : pct >= 60 ? 'Bagus! Terus belajar untuk hasil yang lebih baik! 💪' : 'Jangan menyerah! Pelajari kembali materinya ya! 📚';
-      document.getElementById('score-desc').textContent = desc;
-    }
-
-    function resetQuiz() {
-      currentQ = 0;
-      userAnswers = new Array(20).fill(-1);
-      document.getElementById('quiz-container').classList.remove('hidden');
-      document.getElementById('quiz-result').classList.add('hidden');
-      renderQuestion();
-    }
-
-    // === VISITOR STATS & DATA SDK ===
-    let allVisits = [];
-    let chartsInitialized = false;
-    let yearlyChart, monthlyChart, dailyChart;
-
-    async function recordVisit(page) {
-      if (allVisits.length >= 999) return;
-      const result = await window.dataSdk.create({
-        visitor_date: new Date().toISOString(),
-        page_view: page
-      });
-    }
-
-    function updateStats() {
-      const now = new Date();
-      const total = allVisits.length;
-      const thisMonth = allVisits.filter(v => {
-        const d = new Date(v.visitor_date);
-        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-      }).length;
-      const today = allVisits.filter(v => {
-        const d = new Date(v.visitor_date);
-        return d.toDateString() === now.toDateString();
-      }).length;
-      document.getElementById('stat-total').textContent = total;
-      document.getElementById('stat-month').textContent = thisMonth;
-      document.getElementById('stat-today').textContent = today;
-      updateCharts();
-    }
-
-    function updateCharts() {
-      // Yearly
-      const years = [2026, 2027, 2028, 2029, 2030];
-      const yearlyData = years.map(y => allVisits.filter(v => new Date(v.visitor_date).getFullYear() === y).length);
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
       
-      // Monthly 2026
-      const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-      const monthlyData = Array.from({length:12}, (_, i) => allVisits.filter(v => { const d = new Date(v.visitor_date); return d.getFullYear() === 2026 && d.getMonth() === i; }).length);
+      <!-- PEMBINA (Halaman Utama) -->
+      <div id="page-pembina" class="page fade-in">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-black text-primary uppercase inline-block border-b-4 border-accent pb-1">Pembina Utama</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div class="bg-white rounded-2xl shadow-xl p-6 text-center border border-blue-50 card-hover transition-all">
+            <div class="w-44 h-44 mx-auto mb-4 rounded-full border-4 border-primary p-1 overflow-hidden">
+              <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjr2ocqhdhWQl8FuACcAe1cbwvdfY612vOvQU11gkQ3bGAKa_ojrWoG582PSuTkoqQ87J60NAlRGkwwCt8yqDTZaehOtdlylVRExd1viiz_98pV6DHmS6jamKlJNgo3cipaGBk86T7T7qjt1kA9IAUfWFdM_QlqQktz1Qa_lUxPxvVQiwuitcQgWygEB_EO" class="w-full h-full object-cover rounded-full">
+            </div>
+            <h3 class="text-xl font-bold text-primary">Eni Ambarawati, S.Psi</h3>
+            <p class="text-gray-500 font-semibold uppercase text-[10px] tracking-widest mt-1">Koordinator Guru BK</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-xl p-6 text-center border border-blue-50 card-hover transition-all">
+            <div class="w-44 h-44 mx-auto mb-4 rounded-full border-4 border-primary p-1 overflow-hidden">
+              <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhzdFS-lK1WGJRCzRVSorlNov8sKDNQVt7pYXUUjfE5_vZnC_R6yQLJOI_Ka07bVVLh0piRxmHasrLo0FN6JwZRyc_5ys15xEZ1bwcM4jmsBz1kYfB1bWYv_S1xJIieqRV8y-mwWrAUiMkbVRs5XfFh_Ok-uNokW1PGCcDg-7a8hiib9R6KEDBIuicyDmq3" class="w-full h-full object-cover rounded-full">
+            </div>
+            <h3 class="text-xl font-bold text-primary">Rusmina, S.Pd</h3>
+            <p class="text-gray-500 font-semibold uppercase text-[10px] tracking-widest mt-1">Pembina Karakter</p>
+          </div>
+        </div>
+      </div>
 
-      // Daily last 7 days
-      const dailyLabels = [];
-      const dailyData = [];
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date(); d.setDate(d.getDate() - i);
-        dailyLabels.push(d.toLocaleDateString('id-ID', {day:'numeric',month:'short'}));
-        dailyData.push(allVisits.filter(v => new Date(v.visitor_date).toDateString() === d.toDateString()).length);
-      }
+      <!-- PERPUSTAKAAN (Langsung Link Sites) -->
+      <div id="page-perpus" class="page hidden fade-in">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="bg-light border-2 border-primary/20 rounded-3xl p-10 shadow-inner">
+                <i data-lucide="library" class="w-20 h-20 text-primary mx-auto mb-6"></i>
+                <h2 class="text-3xl font-bold text-primary mb-4">Perpustakaan Digital</h2>
+                <p class="text-gray-600 mb-8 text-lg">Klik tombol di bawah ini untuk mengakses koleksi buku lengkap SMP Negeri 30 Palembang secara online.</p>
+                
+                <a href="https://sites.google.com/view/perpustakaandigitalsmpn30plg?pli=1&authuser=1" target="_blank" 
+                   class="inline-flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-2xl font-bold text-xl shadow-lg hover:bg-accent hover:scale-105 transition-all">
+                    <i data-lucide="external-link"></i> Buka Perpustakaan
+                </a>
+            </div>
+            
+            <div class="mt-10 grid grid-cols-2 gap-4">
+                <div class="p-4 bg-white border rounded-xl flex items-center gap-3">
+                    <i data-lucide="book-open" class="text-primary"></i>
+                    <span class="text-sm font-medium">Buku Pelajaran</span>
+                </div>
+                <div class="p-4 bg-white border rounded-xl flex items-center gap-3">
+                    <i data-lucide="bookmark" class="text-primary"></i>
+                    <span class="text-sm font-medium">Karya Ilmiah</span>
+                </div>
+            </div>
+        </div>
+      </div>
 
-      if (!chartsInitialized) {
-        const ctx1 = document.getElementById('chart-yearly');
-        const ctx2 = document.getElementById('chart-monthly');
-        const ctx3 = document.getElementById('chart-daily');
-        if (!ctx1 || !ctx2 || !ctx3) return;
-        
-        yearlyChart = new Chart(ctx1, { type:'line', data:{ labels:years, datasets:[{label:'Pengunjung',data:yearlyData,borderColor:'#1a56db',backgroundColor:'rgba(26,86,219,0.1)',fill:true,tension:0.3}] }, options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}} });
-        monthlyChart = new Chart(ctx2, { type:'bar', data:{ labels:months, datasets:[{label:'Pengunjung',data:monthlyData,backgroundColor:'#1a56db',borderRadius:4}] }, options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}} });
-        dailyChart = new Chart(ctx3, { type:'line', data:{ labels:dailyLabels, datasets:[{label:'Pengunjung',data:dailyData,borderColor:'#1a56db',backgroundColor:'rgba(26,86,219,0.1)',fill:true,tension:0.3,pointBackgroundColor:'#1a56db'}] }, options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}} });
-        chartsInitialized = true;
-      } else {
-        yearlyChart.data.datasets[0].data = yearlyData; yearlyChart.update();
-        monthlyChart.data.datasets[0].data = monthlyData; monthlyChart.update();
-        dailyChart.data.labels = dailyLabels; dailyChart.data.datasets[0].data = dailyData; dailyChart.update();
-      }
+      <!-- HOME -->
+      <div id="page-home" class="page hidden fade-in">
+        <div class="bg-gradient-to-r from-primary to-accent rounded-3xl p-10 text-white shadow-2xl mb-10 text-center">
+            <h2 class="text-3xl font-bold mb-2 uppercase">Selamat Datang</h2>
+            <p class="opacity-90 italic">Portal Resmi Agen Perubahan SMPN 30 Palembang</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-blue-50 p-6 rounded-2xl text-center">
+                <i data-lucide="check-circle" class="text-primary mx-auto mb-3"></i>
+                <h4 class="font-bold">Integritas</h4>
+            </div>
+            <div class="bg-blue-50 p-6 rounded-2xl text-center">
+                <i data-lucide="users" class="text-primary mx-auto mb-3"></i>
+                <h4 class="font-bold">Solidaritas</h4>
+            </div>
+            <div class="bg-blue-50 p-6 rounded-2xl text-center">
+                <i data-lucide="award" class="text-primary mx-auto mb-3"></i>
+                <h4 class="font-bold">Prestasi</h4>
+            </div>
+        </div>
+      </div>
+
+      <!-- STATISTIK -->
+      <div id="page-statistik" class="page hidden fade-in">
+        <h2 class="text-2xl font-bold text-primary mb-8 text-center uppercase">Analisis Data</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                <h4 class="text-xs font-bold text-gray-400 mb-4 uppercase italic">Statistik Garis (Trend)</h4>
+                <canvas id="chart-line"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                <h4 class="text-xs font-bold text-gray-400 mb-4 uppercase italic">Statistik Batang (Volume)</h4>
+                <canvas id="chart-bar"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 lg:col-span-2 max-w-sm mx-auto w-full">
+                <h4 class="text-xs font-bold text-gray-400 mb-4 uppercase italic text-center">Statistik Lingkaran (Proporsi)</h4>
+                <canvas id="chart-pie"></canvas>
+            </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="bg-primary text-white text-center py-4 mt-auto">
+      <p class="text-[10px] uppercase tracking-widest">© 2026 | Dibuat oleh Bima Wahyu Pratama</p>
+    </footer>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById('page-' + pageId).classList.remove('hidden');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active', 'text-primary'));
+      document.getElementById('nav-' + pageId).classList.add('nav-active');
+      
+      if(pageId === 'statistik') initAllCharts();
     }
 
-    // === INIT ===
-    const defaultConfig = {
-      site_title: 'Agen Perubahan SMP Negeri 30 Palembang',
-      background_color: '#ffffff',
-      primary_color: '#1a56db',
-      text_color: '#1f2937',
-      surface_color: '#f0f6ff',
-      accent_color: '#0d3b9e',
-      font_family: 'Poppins',
-      font_size: 16
+    let charts = {};
+    function initAllCharts() {
+        const ctxL = document.getElementById('chart-line').getContext('2d');
+        const ctxB = document.getElementById('chart-bar').getContext('2d');
+        const ctxP = document.getElementById('chart-pie').getContext('2d');
+
+        if(charts.line) Object.values(charts).forEach(c => c.destroy());
+
+        charts.line = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei'],
+                datasets: [{ label: 'Kunjungan', data: [15, 45, 30, 80, 100], borderColor: '#1a56db', tension: 0.4, fill: true, backgroundColor: 'rgba(26,86,219,0.05)' }]
+            }
+        });
+
+        charts.bar = new Chart(ctxB, {
+            type: 'bar',
+            data: {
+                labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum'],
+                datasets: [{ label: 'Data Perubahan', data: [12, 19, 3, 5, 2], backgroundColor: '#1a56db' }]
+            }
+        });
+
+        charts.pie = new Chart(ctxP, {
+            type: 'pie',
+            data: {
+                labels: ['Luring', 'Daring'],
+                datasets: [{ data: [70, 30], backgroundColor: ['#1a56db', '#bfdbfe'] }]
+            }
+        });
+    }
+
+    window.onload = () => {
+      lucide.createIcons();
+      showPage('pembina'); // Start di halaman Pembina sesuai request
     };
-
-    window.elementSdk.init({
-      defaultConfig,
-      onConfigChange: async (config) => {
-        const title = config.site_title || defaultConfig.site_title;
-        document.getElementById('site-title').textContent = title;
-        document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
-        document.body.style.color = config.text_color || defaultConfig.text_color;
-        const font = config.font_family || defaultConfig.font_family;
-        document.body.style.fontFamily = `${font}, Poppins, sans-serif`;
-        const baseSize = config.font_size || defaultConfig.font_size;
-        document.body.style.fontSize = baseSize + 'px';
-      },
-      mapToCapabilities: (config) => ({
-        recolorables: [
-          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({background_color:v}); }},
-          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({surface_color:v}); }},
-          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({text_color:v}); }},
-          { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({primary_color:v}); }},
-          { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({accent_color:v}); }}
-        ],
-        borderables: [],
-        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({font_family:v}); }},
-        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({font_size:v}); }}
-      }),
-      mapToEditPanelValues: (config) => new Map([
-        ["site_title", config.site_title || defaultConfig.site_title]
-      ])
-    });
-
-    // Data SDK init
-    (async () => {
-      const result = await window.dataSdk.init({
-        onDataChanged(data) {
-          allVisits = data;
-          updateStats();
-        }
-      });
-      if (result.isOk) {
-        recordVisit('home');
-      }
-    })();
-
-    // Init quiz
-    renderQuestion();
-    lucide.createIcons();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fa18010c3b26be8',t:'MTc3ODUwNTgyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>

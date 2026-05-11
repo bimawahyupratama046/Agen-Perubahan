@@ -74,33 +74,1649 @@
        <h3 class="text-lg font-bold text-blue-800">Rusmina, S.Pd</h3>
        <p class="text-blue-500 text-sm">Guru / Pendamping Agen Perubahan</p>
       </div>
-     </div><!-- 5 Pilar Agen Perubahan -->
-     <div class="max-w-6xl mx-auto px-4 py-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl">
-      <h2 class="text-2xl font-bold text-blue-800 text-center mb-10">5 Pilar Agen Perubahan</h2>
-      <div class="grid md:grid-cols-5 gap-4">
-       <div class="text-center">
-        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-         <i data-lucide="heart" class="w-8 h-8 text-white"></i>
+     </div>
+    </div><!-- Materi Cards -->
+    <div class="max-w-6xl mx-auto px-4 pb-12">
+     <h2 class="text-2xl font-bold text-blue-800 text-center mb-8">Materi Pembelajaran</h2>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="materi-cards"></div>
+    </div>
+   </div><!-- MATERI PAGE -->
+   <div id="page-materi" class="page hidden fade-in">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+     <button onclick="showPage('home')" class="flex items-center gap-2 text-blue-600 mb-6 hover:text-blue-800 font-medium"> <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali </button>
+     <div id="materi-content"></div>
+    </div>
+   </div><!-- QUIZ PAGE -->
+   <div id="page-quiz" class="page hidden fade-in">
+    <div class="max-w-3xl mx-auto px-4 py-8">
+     <button onclick="backToMateri()" class="flex items-center gap-2 text-blue-600 mb-6 hover:text-blue-800 font-medium"> <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Materi </button>
+     <div id="quiz-container"></div>
+    </div>
+   </div><!-- STATISTIK PAGE -->
+   <div id="page-statistik" class="page hidden fade-in">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+     <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-6 h-6"></i> Statistik Pengunjung</h2>
+     <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+       <p class="text-sm text-blue-500">Total Pengunjung</p>
+       <p id="stat-total" class="text-3xl font-bold text-blue-800">0</p>
+      </div>
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+       <p class="text-sm text-blue-500">Bulan Ini</p>
+       <p id="stat-month" class="text-3xl font-bold text-blue-800">0</p>
+      </div>
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+       <p class="text-sm text-blue-500">Hari Ini</p>
+       <p id="stat-today" class="text-3xl font-bold text-blue-800">0</p>
+      </div>
+     </div>
+     <div class="flex gap-2 mb-6">
+      <button onclick="setChartType('bar')" id="btn-bar" class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium">Diagram Batang</button> <button onclick="setChartType('line')" id="btn-line" class="px-4 py-2 rounded-lg bg-blue-100 text-blue-700 text-sm font-medium">Diagram Garis</button>
+     </div>
+     <div class="flex gap-2 mb-6">
+      <button onclick="setChartPeriod('year')" id="btn-year" class="px-3 py-1.5 rounded-lg bg-blue-200 text-blue-800 text-xs font-medium">Tahunan</button> <button onclick="setChartPeriod('month')" id="btn-month" class="px-3 py-1.5 rounded-lg bg-blue-100 text-blue-700 text-xs font-medium">Bulanan</button> <button onclick="setChartPeriod('day')" id="btn-day" class="px-3 py-1.5 rounded-lg bg-blue-100 text-blue-700 text-xs font-medium">Harian</button>
+     </div>
+     <div class="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm">
+      <svg id="chart-svg" width="100%" height="300" class="overflow-visible"></svg>
+     </div>
+    </div>
+   </div><!-- NILAI PAGE -->
+   <div id="page-nilai" class="page hidden fade-in">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+     <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center gap-2"><i data-lucide="trophy" class="w-6 h-6"></i> Riwayat Nilai Quiz</h2>
+     <div id="nilai-list" class="space-y-3"></div>
+     <div id="nilai-empty" class="text-center py-12 text-blue-400">
+      <i data-lucide="clipboard" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+      <p>Belum ada riwayat nilai. Selesaikan quiz untuk melihat hasilnya!</p>
+     </div>
+    </div>
+   </div><!-- Footer -->
+   <footer class="bg-blue-900 text-blue-200 py-8 px-4 mt-12">
+    <div class="max-w-4xl mx-auto text-center">
+     <p class="font-semibold text-white">SMP Negeri 30 Palembang</p>
+     <p class="text-sm mt-1">Agen Perubahan — Membangun Karakter Generasi Muda</p>
+     <p class="text-xs mt-3 text-blue-400">© 2026 - Hak Cipta Dilindungi</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // ===== CONFIG & SDK =====
+    const defaultConfig = {
+      site_title: 'Agen Perubahan SMP Negeri 30 Palembang',
+      welcome_text: 'Selamat Datang di Portal Agen Perubahan',
+      background_color: '#ffffff',
+      surface_color: '#eff6ff',
+      text_color: '#1e3a5f',
+      primary_action_color: '#2563eb',
+      secondary_action_color: '#3b82f6'
+    };
+
+    let allData = [];
+    let currentTopic = 0;
+    let chartType = 'bar';
+    let chartPeriod = 'year';
+
+    // ===== MATERI DATA =====
+    const materiData = [
+      {
+        id: 'bullying',
+        title: 'Bullying',
+        icon: 'shield-alert',
+        color: 'from-red-400 to-red-600',
+        video: 'https://youtu.be/am3sGO12f6Q?si=IhtmCI0Du_zJ6G_R',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Apa itu Bullying?</h3>
+<p class="mb-3">Bullying adalah perilaku agresif yang dilakukan secara berulang-ulang oleh seseorang atau sekelompok orang terhadap orang lain yang lebih lemah, dengan tujuan untuk menyakiti, mengintimidasi, atau mengontrol korban.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Jenis-Jenis Bullying:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Bullying Fisik:</strong> Memukul, menendang, mendorong, merusak barang milik korban</li>
+<li><strong>Bullying Verbal:</strong> Mengejek, menghina, memanggil dengan julukan buruk, mengancam</li>
+<li><strong>Bullying Sosial:</strong> Mengucilkan, menyebarkan gosip, mempermalukan di depan umum</li>
+<li><strong>Cyberbullying:</strong> Mengintimidasi melalui media sosial, pesan teks, atau platform online</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Dampak Bullying:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Depresi dan kecemasan</li>
+<li>Menurunnya prestasi akademik</li>
+<li>Kehilangan kepercayaan diri</li>
+<li>Gangguan tidur dan makan</li>
+<li>Dalam kasus ekstrem, dapat menyebabkan pikiran untuk menyakiti diri sendiri</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Mengatasi Bullying:</h4>
+<ol class="list-decimal pl-5 space-y-1">
+<li>Berani melapor kepada guru atau orang tua</li>
+<li>Jangan membalas dengan kekerasan</li>
+<li>Dokumentasikan kejadian bullying</li>
+<li>Dukung teman yang menjadi korban</li>
+<li>Bersikap asertif dan percaya diri</li>
+</ol>`,
+        quiz: [
+          {q:'Apa yang dimaksud dengan bullying?',o:['Bermain bersama teman','Perilaku agresif berulang untuk menyakiti orang lain','Bercanda dengan teman','Kompetisi sehat'],a:1},
+          {q:'Mana yang termasuk cyberbullying?',o:['Memukul teman','Menyebarkan foto memalukan di media sosial','Tidak mengajak bermain','Mengambil makanan'],a:1},
+          {q:'Apa dampak bullying terhadap korban?',o:['Menjadi lebih kuat','Depresi dan menurunnya prestasi','Lebih banyak teman','Tidak ada dampak'],a:1},
+          {q:'Jika melihat teman di-bully, apa yang harus dilakukan?',o:['Ikut membully','Diam saja','Melapor kepada guru','Merekam dan menyebarkan'],a:2},
+          {q:'Bullying verbal meliputi...',o:['Memukul','Mengejek dan menghina','Mengucilkan','Merusak barang'],a:1},
+          {q:'Mana yang BUKAN cara mengatasi bullying?',o:['Melapor ke guru','Membalas dengan kekerasan','Dokumentasikan kejadian','Bersikap asertif'],a:1},
+          {q:'Bullying sosial adalah...',o:['Memukul di tempat umum','Mengucilkan dan menyebarkan gosip','Mengirim pesan jahat','Mencuri uang'],a:1},
+          {q:'Mengapa korban bullying sering tidak melapor?',o:['Merasa takut dan malu','Tidak ada alasan','Mereka menikmatinya','Sudah terbiasa'],a:0},
+          {q:'Siapa yang bertanggung jawab mencegah bullying di sekolah?',o:['Hanya guru','Hanya siswa','Semua warga sekolah','Hanya kepala sekolah'],a:2},
+          {q:'Apa langkah pertama jika kamu menjadi korban bullying?',o:['Membalas','Diam saja','Ceritakan kepada orang dewasa yang dipercaya','Pindah sekolah'],a:2},
+          {q:'Bullying fisik contohnya...',o:['Mengejek nama','Memukul dan menendang','Menyebarkan gosip','Memblokir di media sosial'],a:1},
+          {q:'Apa ciri-ciri seseorang yang mengalami bullying?',o:['Selalu ceria','Menarik diri, takut ke sekolah','Banyak teman','Prestasi meningkat'],a:1},
+          {q:'Media apa yang sering digunakan untuk cyberbullying?',o:['Buku tulis','Media sosial dan chat','Papan tulis','Majalah dinding'],a:1},
+          {q:'Bullying dapat terjadi di...',o:['Hanya di sekolah','Hanya di rumah','Di mana saja termasuk online','Hanya di jalan'],a:2},
+          {q:'Sikap yang tepat terhadap pelaku bullying adalah...',o:['Mengagumi','Meniru','Menegur dengan baik dan melapor','Mendukung'],a:2},
+          {q:'Apa yang dimaksud bystander dalam kasus bullying?',o:['Pelaku','Korban','Orang yang menyaksikan','Guru'],a:2},
+          {q:'Mengapa bullying harus dihentikan?',o:['Karena melanggar hak asasi manusia','Karena seru','Karena biasa saja','Tidak perlu dihentikan'],a:0},
+          {q:'Program anti-bullying di sekolah bertujuan untuk...',o:['Menghukum siswa','Menciptakan lingkungan aman','Menambah PR','Membuat peraturan ketat saja'],a:1},
+          {q:'Apa peran Agen Perubahan terkait bullying?',o:['Membully balik','Mencegah dan mengedukasi','Diam saja','Menyebarkan gosip'],a:1},
+          {q:'Self-esteem yang rendah pada korban bullying menyebabkan...',o:['Kepercayaan diri meningkat','Merasa tidak berharga','Banyak teman baru','Prestasi naik'],a:1}
+        ]
+      },
+      {
+        id: 'siswa-harapan-emas',
+        title: 'Program Siswa Harapan Emas',
+        icon: 'award',
+        color: 'from-yellow-400 to-amber-600',
+        video: 'https://youtu.be/QTto0d7Xjns?si=CYjjerwUttr7bRGU',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Program Pemerintah: Siswa Harapan Emas</h3>
+<p class="mb-3">Program Siswa Harapan Emas adalah inisiatif pemerintah untuk membentuk generasi muda Indonesia yang berkarakter emas — berintegritas, berprestasi, dan berkontribusi positif bagi bangsa.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tujuan Program:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Membentuk karakter siswa yang berjiwa Pancasila</li>
+<li>Meningkatkan literasi dan numerasi</li>
+<li>Mengembangkan soft skill dan hard skill</li>
+<li>Mempersiapkan generasi emas Indonesia 2045</li>
+<li>Menciptakan lingkungan belajar yang positif dan inklusif</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Pilar Utama:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Beriman & Bertakwa:</strong> Mengamalkan nilai-nilai agama</li>
+<li><strong>Berkebinekaan Global:</strong> Menghargai perbedaan</li>
+<li><strong>Bergotong Royong:</strong> Bekerja sama untuk kebaikan bersama</li>
+<li><strong>Mandiri:</strong> Mampu mengambil keputusan secara bertanggung jawab</li>
+<li><strong>Bernalar Kritis:</strong> Berpikir logis dan analitis</li>
+<li><strong>Kreatif:</strong> Menghasilkan gagasan dan karya inovatif</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Implementasi di Sekolah:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Kegiatan P5 (Projek Penguatan Profil Pelajar Pancasila)</li>
+<li>Ekstrakurikuler yang mengembangkan bakat</li>
+<li>Program mentoring dan coaching</li>
+<li>Kegiatan sosial dan pengabdian masyarakat</li>
+</ul>`,
+        quiz: [
+          {q:'Apa tujuan utama Program Siswa Harapan Emas?',o:['Menambah jam pelajaran','Membentuk generasi berkarakter emas','Mengurangi libur sekolah','Menambah PR siswa'],a:1},
+          {q:'Tahun berapa target Generasi Emas Indonesia?',o:['2030','2035','2045','2050'],a:2},
+          {q:'Apa yang dimaksud dengan P5?',o:['Pelajaran 5 mata pelajaran','Projek Penguatan Profil Pelajar Pancasila','Program 5 hari sekolah','Pilar 5 pendidikan'],a:1},
+          {q:'Mana yang termasuk pilar Profil Pelajar Pancasila?',o:['Kaya raya','Bernalar kritis','Pandai berdebat','Fisik kuat'],a:1},
+          {q:'Berkebinekaan global berarti...',o:['Hanya bergaul dengan satu suku','Menghargai perbedaan','Tidak peduli budaya lain','Meninggalkan budaya sendiri'],a:1},
+          {q:'Gotong royong dalam konteks program ini adalah...',o:['Bekerja sendiri','Bekerja sama untuk kebaikan bersama','Menyuruh orang lain','Tidak peduli teman'],a:1},
+          {q:'Mandiri berarti...',o:['Tidak butuh siapapun','Mampu mengambil keputusan bertanggung jawab','Egois','Tidak mau dibantu'],a:1},
+          {q:'Kreativitas dalam program ini mencakup...',o:['Mencontek ide orang lain','Menghasilkan gagasan dan karya inovatif','Hanya menggambar','Bermain game'],a:1},
+          {q:'Bagaimana implementasi program di sekolah?',o:['Hanya ujian','Kegiatan P5 dan ekstrakurikuler','Hanya ceramah','Tidak ada kegiatan'],a:1},
+          {q:'Beriman dan bertakwa berarti...',o:['Hanya beribadah','Mengamalkan nilai agama dalam kehidupan','Memaksakan agama','Tidak toleran'],a:1},
+          {q:'Literasi dalam program ini meliputi...',o:['Hanya membaca novel','Kemampuan memahami dan menggunakan informasi','Hanya menulis','Hanya berhitung'],a:1},
+          {q:'Numerasi adalah...',o:['Kemampuan berhitung saja','Kemampuan menggunakan matematika dalam kehidupan','Hafalan rumus','Menghitung uang'],a:1},
+          {q:'Program mentoring bertujuan...',o:['Mengawasi siswa','Membimbing pengembangan potensi siswa','Menghukum siswa','Menambah tugas'],a:1},
+          {q:'Kegiatan sosial dalam program ini contohnya...',o:['Bermain sendiri','Bakti sosial dan pengabdian masyarakat','Liburan','Belanja'],a:1},
+          {q:'Soft skill yang dikembangkan meliputi...',o:['Hanya nilai akademik','Komunikasi, kerja sama, kepemimpinan','Hanya olahraga','Hanya seni'],a:1},
+          {q:'Apa peran guru dalam program ini?',o:['Hanya mengajar di kelas','Fasilitator dan pembimbing karakter','Hanya menilai','Tidak ada peran'],a:1},
+          {q:'Profil Pelajar Pancasila memiliki berapa dimensi?',o:['4','5','6','7'],a:2},
+          {q:'Ekstrakurikuler dalam program bertujuan...',o:['Menambah beban siswa','Mengembangkan bakat dan minat','Mengisi waktu saja','Mengurangi jam belajar'],a:1},
+          {q:'Apa hubungan program ini dengan kurikulum merdeka?',o:['Tidak ada hubungan','Program ini bagian dari implementasi kurikulum merdeka','Saling bertentangan','Menggantikan kurikulum'],a:1},
+          {q:'Siswa Harapan Emas harus memiliki sikap...',o:['Acuh tak acuh','Integritas dan tanggung jawab','Individualis','Malas belajar'],a:1}
+        ]
+      },
+      {
+        id: 'narkoba',
+        title: 'Bahaya Narkoba',
+        icon: 'skull',
+        color: 'from-purple-500 to-purple-700',
+        video: 'https://youtu.be/ZhYszcLbDIo?si=uz4DKEPAX_D6dDKp',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Bahaya Narkoba untuk Kehidupan</h3>
+<p class="mb-3">Narkoba (Narkotika, Psikotropika, dan Zat Adiktif lainnya) adalah zat yang sangat berbahaya dan dapat merusak kehidupan penggunanya serta orang-orang di sekitarnya.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Jenis-Jenis Narkoba:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Narkotika:</strong> Ganja, kokain, heroin, morfin</li>
+<li><strong>Psikotropika:</strong> Ekstasi, sabu-sabu, amfetamin</li>
+<li><strong>Zat Adiktif:</strong> Lem, thinner, alkohol, rokok</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Dampak Narkoba:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Fisik:</strong> Kerusakan organ tubuh, penurunan berat badan drastis, HIV/AIDS</li>
+<li><strong>Mental:</strong> Halusinasi, paranoid, depresi berat, gangguan jiwa</li>
+<li><strong>Sosial:</strong> Dijauhi masyarakat, kehilangan pekerjaan, masuk penjara</li>
+<li><strong>Ekonomi:</strong> Menghabiskan uang, mencuri untuk membeli narkoba</li>
+<li><strong>Kematian:</strong> Overdosis dapat menyebabkan kematian</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Menghindari Narkoba:</h4>
+<ol class="list-decimal pl-5 space-y-1">
+<li>Katakan TIDAK dengan tegas</li>
+<li>Pilih teman yang positif</li>
+<li>Ikuti kegiatan positif (olahraga, seni, organisasi)</li>
+<li>Tingkatkan iman dan ketakwaan</li>
+<li>Kenali ciri-ciri pengedar narkoba</li>
+<li>Laporkan jika mengetahui peredaran narkoba</li>
+</ol>`,
+        quiz: [
+          {q:'Narkoba adalah singkatan dari...',o:['Narkotika dan obat-obatan','Narkotika, Psikotropika, dan Zat Adiktif','Narkotika berbahaya','Narkotik dan obat adiktif'],a:1},
+          {q:'Mana yang termasuk narkotika?',o:['Paracetamol','Ganja dan heroin','Vitamin C','Antibiotik'],a:1},
+          {q:'Dampak fisik penggunaan narkoba adalah...',o:['Tubuh lebih sehat','Kerusakan organ tubuh','Lebih bertenaga','Kulit lebih cerah'],a:1},
+          {q:'Psikotropika contohnya...',o:['Ganja','Ekstasi dan sabu-sabu','Lem','Alkohol'],a:1},
+          {q:'Apa yang harus dilakukan jika ditawari narkoba?',o:['Coba sedikit','Katakan TIDAK dengan tegas','Simpan dulu','Tanya harganya'],a:1},
+          {q:'Overdosis narkoba dapat menyebabkan...',o:['Kesembuhan','Kematian','Kekuatan','Kecerdasan'],a:1},
+          {q:'Cara menghindari narkoba adalah...',o:['Bergaul dengan pengguna narkoba','Pilih teman yang positif','Coba-coba sedikit','Diam di rumah terus'],a:1},
+          {q:'Dampak sosial pengguna narkoba...',o:['Banyak teman','Dijauhi masyarakat dan masuk penjara','Dihormati','Dipuji'],a:1},
+          {q:'Zat adiktif contohnya...',o:['Air mineral','Lem dan thinner','Susu','Jus buah'],a:1},
+          {q:'UU yang mengatur tentang narkotika adalah...',o:['UU No. 35 Tahun 2009','UU Pendidikan','UU Ketenagakerjaan','UU Perkawinan'],a:0},
+          {q:'BNN adalah singkatan dari...',o:['Badan Nasional Narkoba','Badan Narkotika Nasional','Biro Nasional Narkotika','Badan Negara Narkoba'],a:1},
+          {q:'Apa ciri-ciri orang yang menggunakan narkoba?',o:['Selalu ceria','Mata merah, berat badan turun drastis, sering menyendiri','Banyak teman','Rajin belajar'],a:1},
+          {q:'Mengapa remaja rentan terhadap narkoba?',o:['Karena pintar','Rasa ingin tahu tinggi dan pengaruh teman sebaya','Karena kaya','Karena rajin'],a:1},
+          {q:'Apa peran keluarga dalam mencegah narkoba?',o:['Tidak ada peran','Memberikan perhatian dan komunikasi yang baik','Membiarkan saja','Menghukum terus'],a:1},
+          {q:'Rehabilitasi narkoba bertujuan...',o:['Menghukum pengguna','Memulihkan pengguna agar kembali normal','Mengasingkan pengguna','Memenjarakan selamanya'],a:1},
+          {q:'Dampak narkoba terhadap otak adalah...',o:['Otak lebih cerdas','Kerusakan sel otak dan gangguan berpikir','Ingatan lebih tajam','Tidak ada efek'],a:1},
+          {q:'Apa yang dimaksud toleransi dalam konteks narkoba?',o:['Menghargai perbedaan','Tubuh membutuhkan dosis lebih tinggi untuk efek sama','Memaafkan','Bersabar'],a:1},
+          {q:'Pencegahan narkoba di sekolah dapat dilakukan melalui...',o:['Diam saja','Sosialisasi dan kegiatan positif','Menghukum semua siswa','Menutup sekolah'],a:1},
+          {q:'Apa dampak ekonomi pengguna narkoba?',o:['Menjadi kaya','Menghabiskan uang dan mencuri','Hemat','Banyak tabungan'],a:1},
+          {q:'Slogan anti narkoba yang tepat...',o:['Coba sekali tidak apa','Say No to Drugs','Narkoba itu keren','Sesekali boleh'],a:1}
+        ]
+      },
+      {
+        id: 'pelecehan-seksual',
+        title: 'Pelecehan Seksual',
+        icon: 'hand',
+        color: 'from-pink-500 to-rose-600',
+        video: 'https://youtu.be/BplnGR6OAQw?si=U31S76dN5ApYN7gu',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Tindakan Pelecehan Seksual dan Cara Menghindarinya</h3>
+<p class="mb-3">Pelecehan seksual adalah segala bentuk perilaku yang bersifat seksual yang tidak diinginkan dan membuat korban merasa tidak nyaman, terancam, atau terhina.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Bentuk-Bentuk Pelecehan Seksual:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Sentuhan fisik yang tidak diinginkan</li>
+<li>Komentar atau lelucon bernuansa seksual</li>
+<li>Mengirim gambar/video tidak senonoh</li>
+<li>Memperlihatkan bagian tubuh yang tidak pantas</li>
+<li>Memaksa melakukan tindakan seksual</li>
+<li>Catcalling atau siulan yang mengganggu</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Menghindari dan Melindungi Diri:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Kenali batasan tubuhmu:</strong> Tidak ada yang boleh menyentuh area pribadimu</li>
+<li><strong>Berani bilang TIDAK:</strong> Tolak dengan tegas jika merasa tidak nyaman</li>
+<li><strong>Laporkan:</strong> Ceritakan kepada orang tua, guru, atau pihak berwenang</li>
+<li><strong>Hindari tempat sepi:</strong> Usahakan selalu ada teman atau orang dewasa di sekitar</li>
+<li><strong>Waspadai media sosial:</strong> Jangan bagikan foto/video pribadi</li>
+<li><strong>Percaya instingmu:</strong> Jika merasa tidak aman, segera pergi</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Yang Harus Dilakukan Jika Menjadi Korban:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Ini BUKAN salahmu</li>
+<li>Ceritakan kepada orang yang dipercaya</li>
+<li>Simpan bukti (screenshot, dll)</li>
+<li>Laporkan ke pihak berwajib</li>
+<li>Cari bantuan konseling</li>
+</ul>`,
+        quiz: [
+          {q:'Apa yang dimaksud pelecehan seksual?',o:['Bercanda biasa','Perilaku seksual yang tidak diinginkan','Bergandengan tangan','Berpelukan dengan izin'],a:1},
+          {q:'Mana yang termasuk pelecehan seksual?',o:['Jabat tangan','Sentuhan fisik yang tidak diinginkan','Melambaikan tangan','Menepuk bahu teman'],a:1},
+          {q:'Jika mengalami pelecehan, langkah pertama yang harus dilakukan...',o:['Diam saja','Menyalahkan diri sendiri','Ceritakan kepada orang dewasa yang dipercaya','Membalas pelaku'],a:2},
+          {q:'Area tubuh pribadi yang tidak boleh disentuh orang lain disebut...',o:['Area bermain','Area privat/pribadi','Area umum','Area bebas'],a:1},
+          {q:'Catcalling termasuk...',o:['Pujian biasa','Bentuk pelecehan seksual','Sapaan ramah','Hal yang wajar'],a:1},
+          {q:'Apa yang BUKAN cara melindungi diri?',o:['Berani bilang tidak','Diam dan menerima','Laporkan ke guru','Hindari tempat sepi'],a:1},
+          {q:'Jika teman bercerita menjadi korban pelecehan, kita harus...',o:['Menyalahkan teman','Mendengarkan dan membantu melapor','Menyebarkan ceritanya','Tidak percaya'],a:1},
+          {q:'Pelecehan seksual di media sosial contohnya...',o:['Mengirim tugas','Mengirim gambar tidak senonoh','Like foto','Komentar positif'],a:1},
+          {q:'Siapa saja yang bisa menjadi korban pelecehan seksual?',o:['Hanya perempuan','Hanya anak kecil','Siapa saja tanpa memandang jenis kelamin','Hanya orang dewasa'],a:2},
+          {q:'Korban pelecehan seksual sering merasa...',o:['Senang','Malu dan takut untuk melapor','Bangga','Tidak terpengaruh'],a:1},
+          {q:'Apa yang dimaksud consent (persetujuan)?',o:['Dipaksa setuju','Izin yang diberikan secara sadar dan sukarela','Diam berarti setuju','Tidak ada pilihan'],a:1},
+          {q:'Pelaku pelecehan seksual bisa...',o:['Hanya orang asing','Siapa saja termasuk orang yang dikenal','Hanya orang jahat','Hanya orang dewasa'],a:1},
+          {q:'Pelecehan seksual adalah salah siapa?',o:['Korban','Pelaku','Kedua-duanya','Orang tua korban'],a:1},
+          {q:'Lembaga yang menangani kasus kekerasan seksual pada anak...',o:['KPAI dan Komnas Perempuan','Bank Indonesia','Kementerian Keuangan','PLN'],a:0},
+          {q:'Apa pentingnya pendidikan seksual di sekolah?',o:['Tidak penting','Agar siswa tahu cara melindungi diri','Membuat siswa penasaran','Menambah PR'],a:1},
+          {q:'Grooming dalam konteks pelecehan adalah...',o:['Berdandan','Proses pendekatan pelaku untuk mendapat kepercayaan korban','Merawat hewan','Berkebun'],a:1},
+          {q:'Jika seseorang mengirim pesan tidak pantas, kita harus...',o:['Membalas','Blokir, screenshot, dan laporkan','Meneruskan ke teman','Membiarkan'],a:1},
+          {q:'Apa hak korban pelecehan seksual?',o:['Tidak ada hak','Mendapat perlindungan dan keadilan','Disalahkan','Dihukum'],a:1},
+          {q:'Body shaming termasuk bentuk...',o:['Pujian','Kekerasan verbal/pelecehan','Motivasi','Candaan biasa'],a:1},
+          {q:'Nomor layanan pengaduan kekerasan pada anak...',o:['911','119','129','110'],a:2}
+        ]
+      },
+      {
+        id: 'kepemimpinan',
+        title: 'Kepemimpinan yang Baik',
+        icon: 'crown',
+        color: 'from-emerald-400 to-emerald-600',
+        video: 'https://youtu.be/2CFQaWtWqH4?si=63hJfMbu8Kpeb5xj',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Cara Menjadi Pemimpin yang Baik</h3>
+<p class="mb-3">Kepemimpinan adalah kemampuan untuk mempengaruhi, mengarahkan, dan memotivasi orang lain untuk mencapai tujuan bersama. Setiap siswa memiliki potensi untuk menjadi pemimpin yang baik.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Sifat Pemimpin yang Baik:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Integritas:</strong> Jujur dan konsisten antara perkataan dan perbuatan</li>
+<li><strong>Bertanggung jawab:</strong> Berani mengambil keputusan dan menanggung konsekuensi</li>
+<li><strong>Empati:</strong> Memahami perasaan dan kebutuhan orang lain</li>
+<li><strong>Visioner:</strong> Memiliki pandangan jauh ke depan</li>
+<li><strong>Komunikatif:</strong> Mampu menyampaikan ide dengan jelas</li>
+<li><strong>Adil:</strong> Tidak memihak dan menghargai semua orang</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Mengembangkan Jiwa Kepemimpinan:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li>Aktif dalam organisasi sekolah (OSIS, pramuka, dll)</li>
+<li>Berani berbicara di depan umum</li>
+<li>Menjadi contoh yang baik bagi teman</li>
+<li>Belajar mendengarkan pendapat orang lain</li>
+<li>Mengambil inisiatif dalam kegiatan kelompok</li>
+<li>Belajar mengelola waktu dengan baik</li>
+<li>Membaca biografi pemimpin-pemimpin hebat</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tipe-Tipe Kepemimpinan:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li><strong>Demokratis:</strong> Mengajak musyawarah dalam pengambilan keputusan</li>
+<li><strong>Transformasional:</strong> Menginspirasi perubahan positif</li>
+<li><strong>Servant Leadership:</strong> Melayani dan mendahulukan kepentingan anggota</li>
+</ul>`,
+        quiz: [
+          {q:'Apa yang dimaksud kepemimpinan?',o:['Menyuruh orang lain','Kemampuan mempengaruhi dan memotivasi untuk tujuan bersama','Berkuasa atas orang lain','Menjadi bos'],a:1},
+          {q:'Sifat utama pemimpin yang baik adalah...',o:['Sombong','Integritas dan tanggung jawab','Otoriter','Pemarah'],a:1},
+          {q:'Kepemimpinan demokratis berarti...',o:['Memutuskan sendiri','Mengajak musyawarah','Mengikuti perintah atasan','Tidak peduli pendapat lain'],a:1},
+          {q:'Empati dalam kepemimpinan artinya...',o:['Lemah','Memahami perasaan orang lain','Selalu setuju','Tidak tegas'],a:1},
+          {q:'Cara mengembangkan jiwa kepemimpinan di sekolah...',o:['Diam di kelas','Aktif dalam organisasi','Tidak ikut kegiatan','Hanya belajar'],a:1},
+          {q:'Servant leadership adalah...',o:['Memimpin dengan keras','Melayani dan mendahulukan kepentingan anggota','Menjadi pelayan','Tidak memimpin'],a:1},
+          {q:'Pemimpin visioner berarti...',o:['Melihat masa lalu','Memiliki pandangan jauh ke depan','Tidak realistis','Bermimpi saja'],a:1},
+          {q:'Apa pentingnya komunikasi bagi pemimpin?',o:['Tidak penting','Mampu menyampaikan ide dengan jelas','Hanya untuk memerintah','Untuk berdebat'],a:1},
+          {q:'Pemimpin yang adil berarti...',o:['Memihak teman sendiri','Tidak memihak dan menghargai semua','Pilih kasih','Mengabaikan yang lemah'],a:1},
+          {q:'Apa yang harus dilakukan pemimpin saat mengambil keputusan?',o:['Tergesa-gesa','Mempertimbangkan dampak dan musyawarah','Ikut-ikutan','Tidak peduli konsekuensi'],a:1},
+          {q:'Inisiatif dalam kepemimpinan berarti...',o:['Menunggu diperintah','Berani memulai tanpa diminta','Meniru orang lain','Diam saja'],a:1},
+          {q:'Kepemimpinan transformasional bertujuan...',o:['Mempertahankan yang lama','Menginspirasi perubahan positif','Menghancurkan yang ada','Tidak berubah'],a:1},
+          {q:'Mengapa pemimpin harus bisa mendengarkan?',o:['Agar terlihat baik','Untuk memahami kebutuhan dan masalah anggota','Tidak perlu mendengarkan','Hanya formalitas'],a:1},
+          {q:'OSIS melatih siswa untuk...',o:['Bolos sekolah','Berorganisasi dan memimpin','Mendapat uang','Bebas dari pelajaran'],a:1},
+          {q:'Pemimpin yang baik menghadapi masalah dengan...',o:['Lari dari masalah','Mencari solusi bersama','Menyalahkan orang lain','Marah-marah'],a:1},
+          {q:'Apa yang membedakan pemimpin dengan bos?',o:['Pemimpin memerintah, bos membimbing','Pemimpin membimbing, bos memerintah','Sama saja','Tidak ada bedanya'],a:1},
+          {q:'Time management penting bagi pemimpin karena...',o:['Tidak penting','Agar semua tugas terselesaikan dengan baik','Agar terlihat sibuk','Untuk menghindari tugas'],a:1},
+          {q:'Delegasi tugas berarti...',o:['Membuang tanggung jawab','Membagi tugas sesuai kemampuan anggota','Menyuruh semua orang','Tidak bekerja'],a:1},
+          {q:'Pemimpin harus berani karena...',o:['Untuk menakuti orang','Untuk mengambil keputusan yang tepat','Untuk berkelahi','Untuk pamer'],a:1},
+          {q:'Teladan yang baik dari pemimpin contohnya...',o:['Datang terlambat','Disiplin dan jujur','Sering bolos','Suka bergosip'],a:1}
+        ]
+      },
+      {
+        id: 'tanggung-jawab',
+        title: 'Siswa Bertanggung Jawab',
+        icon: 'check-circle',
+        color: 'from-cyan-400 to-cyan-600',
+        video: 'https://www.youtube.com/embed/fmoor8DwqW4',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Menjadi Siswa yang Bertanggung Jawab</h3>
+<p class="mb-3">Tanggung jawab adalah kesadaran untuk melaksanakan tugas dan kewajiban dengan sebaik-baiknya serta siap menanggung konsekuensi dari setiap tindakan yang dilakukan.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Ciri-Ciri Siswa Bertanggung Jawab:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Mengerjakan tugas tepat waktu</li>
+<li>Jujur dalam ujian dan tugas</li>
+<li>Menjaga kebersihan kelas dan sekolah</li>
+<li>Hadir tepat waktu</li>
+<li>Menepati janji</li>
+<li>Berani mengakui kesalahan</li>
+<li>Menjaga barang milik sendiri dan orang lain</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tanggung Jawab Siswa:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Terhadap diri sendiri:</strong> Menjaga kesehatan, belajar dengan giat</li>
+<li><strong>Terhadap keluarga:</strong> Membantu orang tua, menjaga nama baik keluarga</li>
+<li><strong>Terhadap sekolah:</strong> Menaati peraturan, menjaga fasilitas</li>
+<li><strong>Terhadap masyarakat:</strong> Menjaga lingkungan, menghormati tetangga</li>
+<li><strong>Terhadap negara:</strong> Belajar untuk memajukan bangsa</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Melatih Tanggung Jawab:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Buat jadwal belajar dan patuhi</li>
+<li>Catat semua tugas dan deadline</li>
+<li>Mulai dari hal-hal kecil</li>
+<li>Jangan menunda pekerjaan</li>
+<li>Evaluasi diri secara berkala</li>
+</ul>`,
+        quiz: [
+          {q:'Apa yang dimaksud tanggung jawab?',o:['Melakukan sesuka hati','Kesadaran melaksanakan tugas dan menanggung konsekuensi','Menyuruh orang lain','Menghindari tugas'],a:1},
+          {q:'Ciri siswa bertanggung jawab adalah...',o:['Sering terlambat','Mengerjakan tugas tepat waktu','Mencontek','Bolos sekolah'],a:1},
+          {q:'Tanggung jawab terhadap diri sendiri contohnya...',o:['Begadang setiap malam','Menjaga kesehatan dan belajar giat','Malas-malasan','Tidak peduli masa depan'],a:1},
+          {q:'Jika berbuat salah, siswa bertanggung jawab akan...',o:['Menyalahkan orang lain','Berani mengakui kesalahan','Bersembunyi','Berbohong'],a:1},
+          {q:'Tanggung jawab terhadap sekolah meliputi...',o:['Merusak fasilitas','Menaati peraturan dan menjaga fasilitas','Bolos sekolah','Membuat keributan'],a:1},
+          {q:'Cara melatih tanggung jawab adalah...',o:['Menunda pekerjaan','Buat jadwal dan patuhi','Tidak peduli deadline','Bergantung pada orang lain'],a:1},
+          {q:'Mengapa tanggung jawab penting bagi siswa?',o:['Tidak penting','Membentuk karakter dan kepercayaan diri','Agar dipuji','Untuk menghindari hukuman saja'],a:1},
+          {q:'Tanggung jawab terhadap keluarga contohnya...',o:['Membangkang','Membantu orang tua dan menjaga nama baik','Tidak peduli keluarga','Selalu meminta'],a:1},
+          {q:'Menepati janji adalah wujud tanggung jawab terhadap...',o:['Diri sendiri dan orang lain','Tidak ada','Guru saja','Pemerintah'],a:0},
+          {q:'Siswa yang jujur dalam ujian menunjukkan...',o:['Kebodohan','Tanggung jawab dan integritas','Kelemahan','Ketakutan'],a:1},
+          {q:'Apa akibat tidak bertanggung jawab?',o:['Dipuji','Kehilangan kepercayaan dan masalah menumpuk','Sukses','Banyak teman'],a:1},
+          {q:'Piket kelas melatih siswa untuk...',o:['Malas','Bertanggung jawab terhadap kebersihan','Bolos','Menyuruh orang lain'],a:1},
+          {q:'Deadline tugas harus...',o:['Diabaikan','Dipatuhi dan diselesaikan tepat waktu','Ditunda terus','Dikerjakan orang lain'],a:1},
+          {q:'Tanggung jawab terhadap lingkungan contohnya...',o:['Membuang sampah sembarangan','Menjaga kebersihan lingkungan','Merusak tanaman','Tidak peduli polusi'],a:1},
+          {q:'Evaluasi diri berguna untuk...',o:['Menyalahkan diri','Mengetahui kemajuan dan area perbaikan','Menyombongkan diri','Tidak ada gunanya'],a:1},
+          {q:'Siswa bertanggung jawab mengelola waktu dengan...',o:['Tidak ada jadwal','Membuat prioritas dan jadwal','Bermain terus','Tidur sepanjang hari'],a:1},
+          {q:'Menjaga barang milik orang lain termasuk tanggung jawab...',o:['Tidak termasuk','Sosial dan moral','Akademik','Fisik'],a:1},
+          {q:'Apa hubungan tanggung jawab dengan kemandirian?',o:['Tidak ada hubungan','Tanggung jawab membangun kemandirian','Saling bertentangan','Kemandirian menghilangkan tanggung jawab'],a:1},
+          {q:'Siswa yang proaktif berarti...',o:['Menunggu disuruh','Bertindak tanpa menunggu perintah','Malas','Tidak peduli'],a:1},
+          {q:'Tanggung jawab terhadap negara sebagai pelajar...',o:['Tidak ada','Belajar giat untuk memajukan bangsa','Meninggalkan negara','Tidak perlu'],a:1}
+        ]
+      },
+      {
+        id: 'tugas-pelajar',
+        title: 'Tugas Siswa sebagai Pelajar',
+        icon: 'book-open',
+        color: 'from-blue-400 to-indigo-600',
+        video: 'https://www.youtube.com/embed/y2X7c9SBER0',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Tugas Siswa sebagai Pelajar di Sekolah</h3>
+<p class="mb-3">Sebagai pelajar, siswa memiliki tugas dan kewajiban yang harus dipenuhi untuk mencapai keberhasilan dalam pendidikan dan pembentukan karakter.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tugas Utama Pelajar:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Belajar:</strong> Menuntut ilmu dengan sungguh-sungguh</li>
+<li><strong>Disiplin:</strong> Menaati semua peraturan sekolah</li>
+<li><strong>Menghormati:</strong> Menghargai guru, staf, dan sesama siswa</li>
+<li><strong>Berpartisipasi:</strong> Aktif dalam kegiatan pembelajaran dan ekstrakurikuler</li>
+<li><strong>Menjaga:</strong> Merawat fasilitas dan lingkungan sekolah</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Hak dan Kewajiban Siswa:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Hak:</strong> Mendapat pendidikan yang layak, perlakuan adil, fasilitas belajar</li>
+<li><strong>Kewajiban:</strong> Belajar, menaati aturan, menghormati guru, menjaga ketertiban</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tips Sukses sebagai Pelajar:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Buat target belajar yang realistis</li>
+<li>Aktif bertanya dan berdiskusi di kelas</li>
+<li>Kelola waktu antara belajar, bermain, dan istirahat</li>
+<li>Ikuti kegiatan yang mengembangkan potensi</li>
+<li>Jaga kesehatan fisik dan mental</li>
+<li>Bangun relasi positif dengan teman dan guru</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Etika di Sekolah:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Berpakaian rapi sesuai aturan</li>
+<li>Tidak membawa barang terlarang</li>
+<li>Menggunakan bahasa yang sopan</li>
+<li>Tidak mengganggu proses belajar mengajar</li>
+<li>Menjaga nama baik sekolah di manapun berada</li>
+</ul>`,
+        quiz: [
+          {q:'Tugas utama seorang pelajar adalah...',o:['Bermain','Belajar dan menuntut ilmu','Bersenang-senang','Tidur'],a:1},
+          {q:'Disiplin di sekolah meliputi...',o:['Datang sesuka hati','Menaati peraturan sekolah','Melanggar aturan','Bolos'],a:1},
+          {q:'Hak siswa di sekolah adalah...',o:['Berbuat sesuka hati','Mendapat pendidikan yang layak','Tidak mengerjakan tugas','Melanggar aturan'],a:1},
+          {q:'Kewajiban siswa terhadap guru adalah...',o:['Mengabaikan','Menghormati dan menghargai','Membantah','Tidak peduli'],a:1},
+          {q:'Aktif bertanya di kelas menunjukkan...',o:['Kebodohan','Semangat belajar dan rasa ingin tahu','Sok pintar','Mengganggu'],a:1},
+          {q:'Menjaga fasilitas sekolah adalah tanggung jawab...',o:['Hanya cleaning service','Semua warga sekolah','Hanya guru','Hanya kepala sekolah'],a:1},
+          {q:'Etika berpakaian di sekolah berarti...',o:['Pakai baju sesuka hati','Berpakaian rapi sesuai aturan','Tidak perlu seragam','Pakai baju mahal'],a:1},
+          {q:'Ekstrakurikuler bertujuan...',o:['Menambah beban','Mengembangkan potensi dan bakat','Mengurangi belajar','Bolos pelajaran'],a:1},
+          {q:'Manajemen waktu bagi pelajar meliputi...',o:['Main terus','Seimbang antara belajar, bermain, dan istirahat','Belajar 24 jam','Tidak ada jadwal'],a:1},
+          {q:'Siswa harus menjaga nama baik sekolah di...',o:['Hanya di sekolah','Di manapun berada','Hanya di rumah','Tidak perlu'],a:1},
+          {q:'Mengapa harus aktif dalam pembelajaran?',o:['Tidak perlu','Agar memahami materi dengan baik','Untuk pamer','Agar diperhatikan guru'],a:1},
+          {q:'Bahasa yang sopan di sekolah contohnya...',o:['Bahasa kasar','Menggunakan kata-kata yang baik dan santun','Membentak','Mengejek'],a:1},
+          {q:'Tidak membawa barang terlarang ke sekolah termasuk...',o:['Hal tidak penting','Kewajiban menaati peraturan','Hak siswa','Saran saja'],a:1},
+          {q:'Kerja kelompok melatih siswa untuk...',o:['Menyontek','Bekerja sama dan menghargai pendapat','Malas','Bergantung pada satu orang'],a:1},
+          {q:'Target belajar yang realistis berarti...',o:['Harus sempurna','Sesuai kemampuan dan dapat dicapai','Tidak perlu target','Asal-asalan'],a:1},
+          {q:'Relasi positif dengan teman berarti...',o:['Berkelahi','Saling mendukung dan menghargai','Memilih-milih teman','Bergosip'],a:1},
+          {q:'Peran siswa dalam menjaga ketertiban kelas...',o:['Tidak ada peran','Tidak gaduh dan mengikuti aturan kelas','Membuat keributan','Tidur di kelas'],a:1},
+          {q:'Kesehatan mental pelajar dijaga dengan...',o:['Tidak peduli','Curhat, istirahat cukup, dan hobi positif','Menyimpan masalah sendiri','Begadang terus'],a:1},
+          {q:'Siswa yang baik menghadapi kesulitan belajar dengan...',o:['Menyerah','Bertanya kepada guru dan belajar lebih giat','Mencontek','Bolos'],a:1},
+          {q:'Apa arti pendidikan karakter bagi pelajar?',o:['Tidak penting','Membentuk kepribadian yang baik dan bermoral','Hanya tambahan','Mengurangi waktu belajar'],a:1}
+        ]
+      }
+    ];
+
+    // ===== DATA SDK HANDLER =====
+    const dataHandler = {
+      onDataChanged(data) {
+        allData = data;
+        updateStats();
+        updateNilaiPage();
+      }
+    };
+
+    // ===== INIT =====
+    async function initApp() {
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (!initResult.isOk) {
+        console.error('Data SDK init failed');
+      }
+      // Record visit
+      recordVisit();
+      renderMateriCards();
+      lucide.createIcons();
+    }
+
+    async function recordVisit() {
+      const today = new Date().toISOString().split('T')[0];
+      if (allData.filter(d => d.type === 'visit').length >= 900) return;
+      const result = await window.dataSdk.create({
+        type: 'visit',
+        visitor_date: today,
+        quiz_topic: '',
+        quiz_score: 0,
+        student_name: '',
+        total_questions: 0
+      });
+    }
+
+    // ===== ELEMENT SDK =====
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const title = config.site_title || defaultConfig.site_title;
+        const welcome = config.welcome_text || defaultConfig.welcome_text;
+        const bg = config.background_color || defaultConfig.background_color;
+        const surface = config.surface_color || defaultConfig.surface_color;
+        const text = config.text_color || defaultConfig.text_color;
+        const primary = config.primary_action_color || defaultConfig.primary_action_color;
+        const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
+        const font = config.font_family || 'Plus Jakarta Sans';
+        const fontSize = config.font_size || 16;
+
+        document.getElementById('nav-title').textContent = title.includes('SMP') ? 'Agen Perubahan' : title;
+        document.getElementById('hero-title').textContent = welcome;
+        document.body.style.backgroundColor = bg;
+        document.body.style.color = text;
+        document.body.style.fontFamily = `${font}, Plus Jakarta Sans, sans-serif`;
+        document.body.style.fontSize = `${fontSize}px`;
+
+        document.querySelectorAll('.card-hover').forEach(el => {
+          el.style.backgroundColor = surface;
+        });
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+          { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || 'Plus Jakarta Sans', set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || 16, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['site_title', config.site_title || defaultConfig.site_title],
+        ['welcome_text', config.welcome_text || defaultConfig.welcome_text]
+      ])
+    });
+
+    initApp();
+
+    // ===== NAVIGATION =====
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      const el = document.getElementById('page-' + page);
+      if (el) { el.classList.remove('hidden'); el.classList.add('fade-in'); }
+      if (page === 'statistik') renderChart();
+      if (page === 'nilai') updateNilaiPage();
+      window.scrollTo(0, 0);
+    }
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.toggle('hidden');
+    });
+    function closeMobileNav() { document.getElementById('mobile-nav').classList.add('hidden'); }
+
+    // ===== MATERI CARDS =====
+    function renderMateriCards() {
+      const container = document.getElementById('materi-cards');
+      container.innerHTML = materiData.map((m, i) => `
+        <div class="card-hover bg-white border border-blue-100 rounded-xl p-5 cursor-pointer shadow-sm" onclick="openMateri(${i})">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br ${m.color} flex items-center justify-center mb-3">
+            <i data-lucide="${m.icon}" class="w-5 h-5 text-white"></i>
+          </div>
+          <h3 class="font-bold text-blue-800 text-sm">${m.title}</h3>
+          <p class="text-xs text-blue-400 mt-1">Materi + Quiz 20 Soal</p>
         </div>
-        <h3 class="font-bold text-blue-800 text-sm">Integritas</h3>
-        <p class="text-xs text-blue-500 mt-1">Jujur dan konsisten</p>
-       </div>
-       <div class="text-center">
-        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-         <i data-lucide="star" class="w-8 h-8 text-white"></i>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // ===== MATERI DETAIL =====
+    function openMateri(index) {
+      currentTopic = index;
+      const m = materiData[index];
+      document.getElementById('materi-content').innerHTML = `
+        <div class="fade-in">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center">
+              <i data-lucide="${m.icon}" class="w-6 h-6 text-white"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-blue-800">${m.title}</h2>
+          </div>
+          <div class="bg-white border border-blue-100 rounded-2xl p-6 mb-6 shadow-sm prose prose-blue max-w-none">
+            ${m.content}
+          </div>
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-6">
+            <h4 class="font-bold text-blue-800 mb-3 flex items-center gap-2"><i data-lucide="video" class="w-5 h-5"></i> Video Pembelajaran</h4>
+            <div class="aspect-video rounded-xl overflow-hidden bg-blue-200">
+              <iframe src="${m.video}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <button onclick="startQuiz(${index})" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2">
+            <i data-lucide="clipboard-list" class="w-5 h-5"></i> Mulai Quiz (20 Soal)
+          </button>
         </div>
-        <h3 class="font-bold text-blue-800 text-sm">Prestasi</h3>
-        <p class="text-xs text-blue-500 mt-1">Berprestasi maksimal</p>
-       </div>
-       <div class="text-center">
-        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-         <i data-lucide="users" class="w-8 h-8 text-white"></i>
+      `;
+      showPage('materi');
+      lucide.createIcons();
+    }
+
+    function backToMateri() { openMateri(currentTopic); }
+
+    // ===== QUIZ =====
+    let quizState = { current: 0, answers: [], topic: 0 };
+
+    function startQuiz(topicIndex) {
+      quizState = { current: 0, answers: new Array(20).fill(-1), topic: topicIndex };
+      renderQuizQuestion();
+      showPage('quiz');
+    }
+
+    function renderQuizQuestion() {
+      const m = materiData[quizState.topic];
+      const q = m.quiz[quizState.current];
+      const container = document.getElementById('quiz-container');
+      const selected = quizState.answers[quizState.current];
+      container.innerHTML = `
+        <div class="fade-in">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm font-medium text-blue-500">Soal ${quizState.current + 1} / 20</span>
+            <span class="text-sm font-medium text-blue-800">${m.title}</span>
+          </div>
+          <div class="w-full bg-blue-100 rounded-full h-2 mb-6">
+            <div class="bg-blue-600 h-2 rounded-full transition-all" style="width:${((quizState.current + 1) / 20) * 100}%"></div>
+          </div>
+          <div class="bg-white border border-blue-100 rounded-2xl p-6 mb-6 shadow-sm">
+            <p class="font-semibold text-blue-900 text-lg">${q.q}</p>
+          </div>
+          <div class="space-y-3">
+            ${q.o.map((opt, i) => `
+              <button onclick="selectAnswer(${i})" class="quiz-option w-full text-left p-4 rounded-xl border-2 ${selected === i ? 'selected' : 'border-blue-100 bg-white'} font-medium text-sm">
+                <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs mr-3">${String.fromCharCode(65 + i)}</span>
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+          <div class="flex gap-3 mt-6">
+            ${quizState.current > 0 ? '<button onclick="prevQuestion()" class="flex-1 py-3 rounded-xl border-2 border-blue-200 text-blue-700 font-medium hover:bg-blue-50 transition">Sebelumnya</button>' : ''}
+            ${quizState.current < 19 ? '<button onclick="nextQuestion()" class="flex-1 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition">Selanjutnya</button>' : '<button onclick="finishQuiz()" class="flex-1 py-3 rounded-xl bg-green-600 text-white font-medium hover:bg-green-700 transition">Selesai</button>'}
+          </div>
         </div>
-        <h3 class="font-bold text-blue-800 text-sm">Kerja Sama</h3>
-        <p class="text-xs text-blue-500 mt-1">Gotong royong</p>
-       </div>
-       <div class="text-center">
-        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+      `;
+    }
+
+    function selectAnswer(i) { quizState.answers[quizState.current] = i; renderQuizQuestion(); }
+    function nextQuestion() { if (quizState.current < 19) { quizState.current++; renderQuizQuestion(); } }
+    function prevQuestion() { if (quizState.current > 0) { quizState.current--; renderQuizQuestion(); } }
+
+    async function finishQuiz() {
+      const m = materiData[quizState.topic];
+      let score = 0;
+      quizState.answers.forEach((ans, i) => { if (ans === m.quiz[i].a) score++; });
+      const percentage = Math.round((score / 20) * 100);
+
+      // Save score
+      const studentName = 'Siswa_' + Date.now().toString(36);
+      const result = await window.dataSdk.create({
+        type: 'score',
+        visitor_date: new Date().toISOString(),
+        quiz_topic: m.title,
+        quiz_score: percentage,
+        student_name: studentName,
+        total_questions: 20
+      });
+
+      // Show result
+      const container = document.getElementById('quiz-container');
+      const emoji = percentage >= 80 ? '🎉' : percentage >= 60 ? '👍' : '💪';
+      container.innerHTML = `
+        <div class="fade-in text-center py-8">
+          <div class="text-6xl mb-4">${emoji}</div>
+          <h3 class="text-2xl font-bold text-blue-800 mb-2">Quiz Selesai!</h3>
+          <p class="text-blue-500 mb-4">${m.title}</p>
+          <div class="inline-flex items-center justify-center w-32 h-32 rounded-full border-4 ${percentage >= 80 ? 'border-green-400 text-green-600' : percentage >= 60 ? 'border-yellow-400 text-yellow-600' : 'border-red-400 text-red-600'} mb-4">
+            <span class="text-4xl font-bold">${percentage}</span>
+          </div>
+          <p class="text-sm text-blue-600 mb-2">Benar: ${score} / 20</p>
+          <p class="text-sm text-blue-400 mb-8">${percentage >= 80 ? 'Luar biasa! Kamu sangat memahami materi ini!' : percentage >= 60 ? 'Bagus! Terus tingkatkan pemahamanmu!' : 'Jangan menyerah! Pelajari kembali materinya ya!'}</p>
+          <div class="flex gap-3 justify-center">
+            <button onclick="openMateri(${quizState.topic})" class="px-6 py-3 rounded-xl border-2 border-blue-200 text-blue-700 font-medium hover:bg-blue-50">Pelajari Lagi</button>
+            <button onclick="showPage('home')" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700">Kembali</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== STATISTICS =====
+    function updateStats() {
+      const visits = allData.filter(d => d.type === 'visit');
+      const today = new Date().toISOString().split('T')[0];
+      const thisMonth = today.substring(0, 7);
+
+      document.getElementById('stat-total').textContent = visits.length;
+      document.getElementById('stat-month').textContent = visits.filter(v => v.visitor_date && v.visitor_date.startsWith(thisMonth)).length;
+      document.getElementById('stat-today').textContent = visits.filter(v => v.visitor_date === today).length;
+    }
+
+    function setChartType(type) {
+      chartType = type;
+      document.getElementById('btn-bar').className = `px-4 py-2 rounded-lg text-sm font-medium ${type === 'bar' ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700'}`;
+      document.getElementById('btn-line').className = `px-4 py-2 rounded-lg text-sm font-medium ${type === 'line' ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700'}`;
+      renderChart();
+    }
+
+    function setChartPeriod(period) {
+      chartPeriod = period;
+      ['year','month','day'].forEach(p => {
+        document.getElementById('btn-' + p).className = `px-3 py-1.5 rounded-lg text-xs font-medium ${p === period ? 'bg-blue-200 text-blue-800' : 'bg-blue-100 text-blue-700'}`;
+      });
+      renderChart();
+    }
+
+    function renderChart() {
+      const svg = document.getElementById('chart-svg');
+      const visits = allData.filter(d => d.type === 'visit');
+      let labels = [], values = [];
+
+      if (chartPeriod === 'year') {
+        const years = {};
+        visits.forEach(v => { if (v.visitor_date) { const y = v.visitor_date.substring(0, 4); years[y] = (years[y] || 0) + 1; } });
+        const sortedYears = Object.keys(years).sort();
+        if (sortedYears.length === 0) { const cy = new Date().getFullYear(); for (let i = cy - 2; i <= cy; i++) { labels.push(String(i)); values.push(years[i] || 0); } }
+        else { sortedYears.forEach(y => { labels.push(y); values.push(years[y]); }); }
+      } else if (chartPeriod === 'month') {
+        const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+        const cy = new Date().getFullYear();
+        for (let i = 0; i < 12; i++) {
+          labels.push(months[i]);
+          const key = `${cy}-${String(i + 1).padStart(2, '0')}`;
+          values.push(visits.filter(v => v.visitor_date && v.visitor_date.startsWith(key)).length);
+        }
+      } else {
+        const days = ['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+        const today = new Date();
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date(today); d.setDate(d.getDate() - i);
+          const key = d.toISOString().split('T')[0];
+          labels.push(days[d.getDay() === 0 ? 6 : d.getDay() - 1]);
+          values.push(visits.filter(v => v.visitor_date === key).length);
+        }
+      }
+
+      const w = svg.clientWidth || 700;
+      const h = 260;
+      const padding = { top: 20, right: 20, bottom: 40, left: 40 };
+      const chartW = w - padding.left - padding.right;
+      const chartH = h - padding.top - padding.bottom;
+      const maxVal = Math.max(...values, 1);
+
+      let html = '';
+      // Grid
+      for (let i = 0; i <= 4; i++) {
+        const y = padding.top + (chartH / 4) * i;
+        html += `<line x1="${padding.left}" y1="${y}" x2="${w - padding.right}" y2="${y}" stroke="#dbeafe" stroke-width="1"/>`;
+        html += `<text x="${padding.left - 8}" y="${y + 4}" text-anchor="end" fill="#6b7280" font-size="10">${Math.round(maxVal - (maxVal / 4) * i)}</text>`;
+      }
+
+      const barW = chartW / labels.length;
+
+      if (chartType === 'bar') {
+        labels.forEach((label, i) => {
+          const x = padding.left + barW * i + barW * 0.2;
+          const barHeight = (values[i] / maxVal) * chartH;
+          const y = padding.top + chartH - barHeight;
+          html += `<rect x="${x}" y="${y}" width="${barW * 0.6}" height="${barHeight}" fill="#3b82f6" rx="4" class="stat-bar"/>`;
+          html += `<text x="${padding.left + barW * i + barW / 2}" y="${h - 10}" text-anchor="middle" fill="#6b7280" font-size="10">${label}</text>`;
+          if (values[i] > 0) html += `<text x="${padding.left + barW * i + barW / 2}" y="${y - 5}" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">${values[i]}</text>`;
+        });
+      } else {
+        let points = [];
+        labels.forEach((label, i) => {
+          const x = padding.left + barW * i + barW / 2;
+          const y = padding.top + chartH - (values[i] / maxVal) * chartH;
+          points.push(`${x},${y}`);
+          html += `<text x="${x}" y="${h - 10}" text-anchor="middle" fill="#6b7280" font-size="10">${label}</text>`;
+        });
+        // Area
+        html += `<polygon points="${padding.left + barW / 2},${padding.top + chartH} ${points.join(' ')} ${padding.left + barW * (labels.length - 1) + barW / 2},${padding.top + chartH}" fill="rgba(59,130,246,0.1)"/>`;
+        html += `<polyline points="${points.join(' ')}" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+        points.forEach((p, i) => {
+          const [x, y] = p.split(',');
+          html += `<circle cx="${x}" cy="${y}" r="4" fill="#2563eb" class="line-point"/>`;
+          if (values[i] > 0) html += `<text x="${x}" y="${y - 10}" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">${values[i]}</text>`;
+        });
+      }
+
+      svg.innerHTML = html;
+    }
+
+    // ===== NILAI PAGE =====
+    function updateNilaiPage() {
+      const scores = allData.filter(d => d.type === 'score').sort((a, b) => (b.visitor_date || '').localeCompare(a.visitor_date || ''));
+      const container = document.getElementById('nilai-list');
+      const empty = document.getElementById('nilai-empty');
+
+      if (scores.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      container.innerHTML = scores.map(s => {
+        const pct = s.quiz_score || 0;
+        const color = pct >= 80 ? 'green' : pct >= 60 ? 'yellow' : 'red';
+        const date = s.visitor_date ? new Date(s.visitor_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+        return `
+          <div class="flex items-center gap-4 bg-white border border-blue-100 rounded-xl p-4 shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-${color}-100 flex items-center justify-center">
+              <span class="text-${color}-600 font-bold text-sm">${pct}%</span>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-blue-800 text-sm">${s.quiz_topic || 'Quiz'}</p>
+              <p class="text-xs text-blue-400">${date}</p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs text-blue-500">${Math.round(pct * 20 / 100)} / 20 benar</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fa14c3cd78aab67',t:'MTc3ODUwMzcwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>     <div class="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm">
+      <svg id="chart-svg" width="100%" height="300" class="overflow-visible"></svg>
+     </div>
+    </div>
+   </div><!-- NILAI PAGE -->
+   <div id="page-nilai" class="page hidden fade-in">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+     <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center gap-2"><i data-lucide="trophy" class="w-6 h-6"></i> Riwayat Nilai Quiz</h2>
+     <div id="nilai-list" class="space-y-3"></div>
+     <div id="nilai-empty" class="text-center py-12 text-blue-400">
+      <i data-lucide="clipboard" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+      <p>Belum ada riwayat nilai. Selesaikan quiz untuk melihat hasilnya!</p>
+     </div>
+    </div>
+   </div><!-- Footer -->
+   <footer class="bg-blue-900 text-blue-200 py-8 px-4 mt-12">
+    <div class="max-w-4xl mx-auto text-center">
+     <p class="font-semibold text-white">SMP Negeri 30 Palembang</p>
+     <p class="text-sm mt-1">Agen Perubahan — Membangun Karakter Generasi Muda</p>
+     <p class="text-xs mt-3 text-blue-400">© 2026 - Hak Cipta Dilindungi</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // ===== CONFIG & SDK =====
+    const defaultConfig = {
+      site_title: 'Agen Perubahan SMP Negeri 30 Palembang',
+      welcome_text: 'Selamat Datang di Portal Agen Perubahan',
+      background_color: '#ffffff',
+      surface_color: '#eff6ff',
+      text_color: '#1e3a5f',
+      primary_action_color: '#2563eb',
+      secondary_action_color: '#3b82f6'
+    };
+
+    let allData = [];
+    let currentTopic = 0;
+    let chartType = 'bar';
+    let chartPeriod = 'year';
+
+    // ===== MATERI DATA =====
+    const materiData = [
+      {
+        id: 'bullying',
+        title: 'Bullying',
+        icon: 'shield-alert',
+        color: 'from-red-400 to-red-600',
+        video: 'https://youtu.be/am3sGO12f6Q?si=IhtmCI0Du_zJ6G_R',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Apa itu Bullying?</h3>
+<p class="mb-3">Bullying adalah perilaku agresif yang dilakukan secara berulang-ulang oleh seseorang atau sekelompok orang terhadap orang lain yang lebih lemah, dengan tujuan untuk menyakiti, mengintimidasi, atau mengontrol korban.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Jenis-Jenis Bullying:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Bullying Fisik:</strong> Memukul, menendang, mendorong, merusak barang milik korban</li>
+<li><strong>Bullying Verbal:</strong> Mengejek, menghina, memanggil dengan julukan buruk, mengancam</li>
+<li><strong>Bullying Sosial:</strong> Mengucilkan, menyebarkan gosip, mempermalukan di depan umum</li>
+<li><strong>Cyberbullying:</strong> Mengintimidasi melalui media sosial, pesan teks, atau platform online</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Dampak Bullying:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Depresi dan kecemasan</li>
+<li>Menurunnya prestasi akademik</li>
+<li>Kehilangan kepercayaan diri</li>
+<li>Gangguan tidur dan makan</li>
+<li>Dalam kasus ekstrem, dapat menyebabkan pikiran untuk menyakiti diri sendiri</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Mengatasi Bullying:</h4>
+<ol class="list-decimal pl-5 space-y-1">
+<li>Berani melapor kepada guru atau orang tua</li>
+<li>Jangan membalas dengan kekerasan</li>
+<li>Dokumentasikan kejadian bullying</li>
+<li>Dukung teman yang menjadi korban</li>
+<li>Bersikap asertif dan percaya diri</li>
+</ol>`,
+        quiz: [
+          {q:'Apa yang dimaksud dengan bullying?',o:['Bermain bersama teman','Perilaku agresif berulang untuk menyakiti orang lain','Bercanda dengan teman','Kompetisi sehat'],a:1},
+          {q:'Mana yang termasuk cyberbullying?',o:['Memukul teman','Menyebarkan foto memalukan di media sosial','Tidak mengajak bermain','Mengambil makanan'],a:1},
+          {q:'Apa dampak bullying terhadap korban?',o:['Menjadi lebih kuat','Depresi dan menurunnya prestasi','Lebih banyak teman','Tidak ada dampak'],a:1},
+          {q:'Jika melihat teman di-bully, apa yang harus dilakukan?',o:['Ikut membully','Diam saja','Melapor kepada guru','Merekam dan menyebarkan'],a:2},
+          {q:'Bullying verbal meliputi...',o:['Memukul','Mengejek dan menghina','Mengucilkan','Merusak barang'],a:1},
+          {q:'Mana yang BUKAN cara mengatasi bullying?',o:['Melapor ke guru','Membalas dengan kekerasan','Dokumentasikan kejadian','Bersikap asertif'],a:1},
+          {q:'Bullying sosial adalah...',o:['Memukul di tempat umum','Mengucilkan dan menyebarkan gosip','Mengirim pesan jahat','Mencuri uang'],a:1},
+          {q:'Mengapa korban bullying sering tidak melapor?',o:['Merasa takut dan malu','Tidak ada alasan','Mereka menikmatinya','Sudah terbiasa'],a:0},
+          {q:'Siapa yang bertanggung jawab mencegah bullying di sekolah?',o:['Hanya guru','Hanya siswa','Semua warga sekolah','Hanya kepala sekolah'],a:2},
+          {q:'Apa langkah pertama jika kamu menjadi korban bullying?',o:['Membalas','Diam saja','Ceritakan kepada orang dewasa yang dipercaya','Pindah sekolah'],a:2},
+          {q:'Bullying fisik contohnya...',o:['Mengejek nama','Memukul dan menendang','Menyebarkan gosip','Memblokir di media sosial'],a:1},
+          {q:'Apa ciri-ciri seseorang yang mengalami bullying?',o:['Selalu ceria','Menarik diri, takut ke sekolah','Banyak teman','Prestasi meningkat'],a:1},
+          {q:'Media apa yang sering digunakan untuk cyberbullying?',o:['Buku tulis','Media sosial dan chat','Papan tulis','Majalah dinding'],a:1},
+          {q:'Bullying dapat terjadi di...',o:['Hanya di sekolah','Hanya di rumah','Di mana saja termasuk online','Hanya di jalan'],a:2},
+          {q:'Sikap yang tepat terhadap pelaku bullying adalah...',o:['Mengagumi','Meniru','Menegur dengan baik dan melapor','Mendukung'],a:2},
+          {q:'Apa yang dimaksud bystander dalam kasus bullying?',o:['Pelaku','Korban','Orang yang menyaksikan','Guru'],a:2},
+          {q:'Mengapa bullying harus dihentikan?',o:['Karena melanggar hak asasi manusia','Karena seru','Karena biasa saja','Tidak perlu dihentikan'],a:0},
+          {q:'Program anti-bullying di sekolah bertujuan untuk...',o:['Menghukum siswa','Menciptakan lingkungan aman','Menambah PR','Membuat peraturan ketat saja'],a:1},
+          {q:'Apa peran Agen Perubahan terkait bullying?',o:['Membully balik','Mencegah dan mengedukasi','Diam saja','Menyebarkan gosip'],a:1},
+          {q:'Self-esteem yang rendah pada korban bullying menyebabkan...',o:['Kepercayaan diri meningkat','Merasa tidak berharga','Banyak teman baru','Prestasi naik'],a:1}
+        ]
+      },
+      {
+        id: 'siswa-harapan-emas',
+        title: 'Program Siswa Harapan Emas',
+        icon: 'award',
+        color: 'from-yellow-400 to-amber-600',
+        video: 'https://youtu.be/QTto0d7Xjns?si=CYjjerwUttr7bRGU',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Program Pemerintah: Siswa Harapan Emas</h3>
+<p class="mb-3">Program Siswa Harapan Emas adalah inisiatif pemerintah untuk membentuk generasi muda Indonesia yang berkarakter emas — berintegritas, berprestasi, dan berkontribusi positif bagi bangsa.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tujuan Program:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Membentuk karakter siswa yang berjiwa Pancasila</li>
+<li>Meningkatkan literasi dan numerasi</li>
+<li>Mengembangkan soft skill dan hard skill</li>
+<li>Mempersiapkan generasi emas Indonesia 2045</li>
+<li>Menciptakan lingkungan belajar yang positif dan inklusif</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Pilar Utama:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Beriman & Bertakwa:</strong> Mengamalkan nilai-nilai agama</li>
+<li><strong>Berkebinekaan Global:</strong> Menghargai perbedaan</li>
+<li><strong>Bergotong Royong:</strong> Bekerja sama untuk kebaikan bersama</li>
+<li><strong>Mandiri:</strong> Mampu mengambil keputusan secara bertanggung jawab</li>
+<li><strong>Bernalar Kritis:</strong> Berpikir logis dan analitis</li>
+<li><strong>Kreatif:</strong> Menghasilkan gagasan dan karya inovatif</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Implementasi di Sekolah:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Kegiatan P5 (Projek Penguatan Profil Pelajar Pancasila)</li>
+<li>Ekstrakurikuler yang mengembangkan bakat</li>
+<li>Program mentoring dan coaching</li>
+<li>Kegiatan sosial dan pengabdian masyarakat</li>
+</ul>`,
+        quiz: [
+          {q:'Apa tujuan utama Program Siswa Harapan Emas?',o:['Menambah jam pelajaran','Membentuk generasi berkarakter emas','Mengurangi libur sekolah','Menambah PR siswa'],a:1},
+          {q:'Tahun berapa target Generasi Emas Indonesia?',o:['2030','2035','2045','2050'],a:2},
+          {q:'Apa yang dimaksud dengan P5?',o:['Pelajaran 5 mata pelajaran','Projek Penguatan Profil Pelajar Pancasila','Program 5 hari sekolah','Pilar 5 pendidikan'],a:1},
+          {q:'Mana yang termasuk pilar Profil Pelajar Pancasila?',o:['Kaya raya','Bernalar kritis','Pandai berdebat','Fisik kuat'],a:1},
+          {q:'Berkebinekaan global berarti...',o:['Hanya bergaul dengan satu suku','Menghargai perbedaan','Tidak peduli budaya lain','Meninggalkan budaya sendiri'],a:1},
+          {q:'Gotong royong dalam konteks program ini adalah...',o:['Bekerja sendiri','Bekerja sama untuk kebaikan bersama','Menyuruh orang lain','Tidak peduli teman'],a:1},
+          {q:'Mandiri berarti...',o:['Tidak butuh siapapun','Mampu mengambil keputusan bertanggung jawab','Egois','Tidak mau dibantu'],a:1},
+          {q:'Kreativitas dalam program ini mencakup...',o:['Mencontek ide orang lain','Menghasilkan gagasan dan karya inovatif','Hanya menggambar','Bermain game'],a:1},
+          {q:'Bagaimana implementasi program di sekolah?',o:['Hanya ujian','Kegiatan P5 dan ekstrakurikuler','Hanya ceramah','Tidak ada kegiatan'],a:1},
+          {q:'Beriman dan bertakwa berarti...',o:['Hanya beribadah','Mengamalkan nilai agama dalam kehidupan','Memaksakan agama','Tidak toleran'],a:1},
+          {q:'Literasi dalam program ini meliputi...',o:['Hanya membaca novel','Kemampuan memahami dan menggunakan informasi','Hanya menulis','Hanya berhitung'],a:1},
+          {q:'Numerasi adalah...',o:['Kemampuan berhitung saja','Kemampuan menggunakan matematika dalam kehidupan','Hafalan rumus','Menghitung uang'],a:1},
+          {q:'Program mentoring bertujuan...',o:['Mengawasi siswa','Membimbing pengembangan potensi siswa','Menghukum siswa','Menambah tugas'],a:1},
+          {q:'Kegiatan sosial dalam program ini contohnya...',o:['Bermain sendiri','Bakti sosial dan pengabdian masyarakat','Liburan','Belanja'],a:1},
+          {q:'Soft skill yang dikembangkan meliputi...',o:['Hanya nilai akademik','Komunikasi, kerja sama, kepemimpinan','Hanya olahraga','Hanya seni'],a:1},
+          {q:'Apa peran guru dalam program ini?',o:['Hanya mengajar di kelas','Fasilitator dan pembimbing karakter','Hanya menilai','Tidak ada peran'],a:1},
+          {q:'Profil Pelajar Pancasila memiliki berapa dimensi?',o:['4','5','6','7'],a:2},
+          {q:'Ekstrakurikuler dalam program bertujuan...',o:['Menambah beban siswa','Mengembangkan bakat dan minat','Mengisi waktu saja','Mengurangi jam belajar'],a:1},
+          {q:'Apa hubungan program ini dengan kurikulum merdeka?',o:['Tidak ada hubungan','Program ini bagian dari implementasi kurikulum merdeka','Saling bertentangan','Menggantikan kurikulum'],a:1},
+          {q:'Siswa Harapan Emas harus memiliki sikap...',o:['Acuh tak acuh','Integritas dan tanggung jawab','Individualis','Malas belajar'],a:1}
+        ]
+      },
+      {
+        id: 'narkoba',
+        title: 'Bahaya Narkoba',
+        icon: 'skull',
+        color: 'from-purple-500 to-purple-700',
+        video: 'https://youtu.be/ZhYszcLbDIo?si=uz4DKEPAX_D6dDKp',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Bahaya Narkoba untuk Kehidupan</h3>
+<p class="mb-3">Narkoba (Narkotika, Psikotropika, dan Zat Adiktif lainnya) adalah zat yang sangat berbahaya dan dapat merusak kehidupan penggunanya serta orang-orang di sekitarnya.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Jenis-Jenis Narkoba:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Narkotika:</strong> Ganja, kokain, heroin, morfin</li>
+<li><strong>Psikotropika:</strong> Ekstasi, sabu-sabu, amfetamin</li>
+<li><strong>Zat Adiktif:</strong> Lem, thinner, alkohol, rokok</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Dampak Narkoba:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Fisik:</strong> Kerusakan organ tubuh, penurunan berat badan drastis, HIV/AIDS</li>
+<li><strong>Mental:</strong> Halusinasi, paranoid, depresi berat, gangguan jiwa</li>
+<li><strong>Sosial:</strong> Dijauhi masyarakat, kehilangan pekerjaan, masuk penjara</li>
+<li><strong>Ekonomi:</strong> Menghabiskan uang, mencuri untuk membeli narkoba</li>
+<li><strong>Kematian:</strong> Overdosis dapat menyebabkan kematian</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Menghindari Narkoba:</h4>
+<ol class="list-decimal pl-5 space-y-1">
+<li>Katakan TIDAK dengan tegas</li>
+<li>Pilih teman yang positif</li>
+<li>Ikuti kegiatan positif (olahraga, seni, organisasi)</li>
+<li>Tingkatkan iman dan ketakwaan</li>
+<li>Kenali ciri-ciri pengedar narkoba</li>
+<li>Laporkan jika mengetahui peredaran narkoba</li>
+</ol>`,
+        quiz: [
+          {q:'Narkoba adalah singkatan dari...',o:['Narkotika dan obat-obatan','Narkotika, Psikotropika, dan Zat Adiktif','Narkotika berbahaya','Narkotik dan obat adiktif'],a:1},
+          {q:'Mana yang termasuk narkotika?',o:['Paracetamol','Ganja dan heroin','Vitamin C','Antibiotik'],a:1},
+          {q:'Dampak fisik penggunaan narkoba adalah...',o:['Tubuh lebih sehat','Kerusakan organ tubuh','Lebih bertenaga','Kulit lebih cerah'],a:1},
+          {q:'Psikotropika contohnya...',o:['Ganja','Ekstasi dan sabu-sabu','Lem','Alkohol'],a:1},
+          {q:'Apa yang harus dilakukan jika ditawari narkoba?',o:['Coba sedikit','Katakan TIDAK dengan tegas','Simpan dulu','Tanya harganya'],a:1},
+          {q:'Overdosis narkoba dapat menyebabkan...',o:['Kesembuhan','Kematian','Kekuatan','Kecerdasan'],a:1},
+          {q:'Cara menghindari narkoba adalah...',o:['Bergaul dengan pengguna narkoba','Pilih teman yang positif','Coba-coba sedikit','Diam di rumah terus'],a:1},
+          {q:'Dampak sosial pengguna narkoba...',o:['Banyak teman','Dijauhi masyarakat dan masuk penjara','Dihormati','Dipuji'],a:1},
+          {q:'Zat adiktif contohnya...',o:['Air mineral','Lem dan thinner','Susu','Jus buah'],a:1},
+          {q:'UU yang mengatur tentang narkotika adalah...',o:['UU No. 35 Tahun 2009','UU Pendidikan','UU Ketenagakerjaan','UU Perkawinan'],a:0},
+          {q:'BNN adalah singkatan dari...',o:['Badan Nasional Narkoba','Badan Narkotika Nasional','Biro Nasional Narkotika','Badan Negara Narkoba'],a:1},
+          {q:'Apa ciri-ciri orang yang menggunakan narkoba?',o:['Selalu ceria','Mata merah, berat badan turun drastis, sering menyendiri','Banyak teman','Rajin belajar'],a:1},
+          {q:'Mengapa remaja rentan terhadap narkoba?',o:['Karena pintar','Rasa ingin tahu tinggi dan pengaruh teman sebaya','Karena kaya','Karena rajin'],a:1},
+          {q:'Apa peran keluarga dalam mencegah narkoba?',o:['Tidak ada peran','Memberikan perhatian dan komunikasi yang baik','Membiarkan saja','Menghukum terus'],a:1},
+          {q:'Rehabilitasi narkoba bertujuan...',o:['Menghukum pengguna','Memulihkan pengguna agar kembali normal','Mengasingkan pengguna','Memenjarakan selamanya'],a:1},
+          {q:'Dampak narkoba terhadap otak adalah...',o:['Otak lebih cerdas','Kerusakan sel otak dan gangguan berpikir','Ingatan lebih tajam','Tidak ada efek'],a:1},
+          {q:'Apa yang dimaksud toleransi dalam konteks narkoba?',o:['Menghargai perbedaan','Tubuh membutuhkan dosis lebih tinggi untuk efek sama','Memaafkan','Bersabar'],a:1},
+          {q:'Pencegahan narkoba di sekolah dapat dilakukan melalui...',o:['Diam saja','Sosialisasi dan kegiatan positif','Menghukum semua siswa','Menutup sekolah'],a:1},
+          {q:'Apa dampak ekonomi pengguna narkoba?',o:['Menjadi kaya','Menghabiskan uang dan mencuri','Hemat','Banyak tabungan'],a:1},
+          {q:'Slogan anti narkoba yang tepat...',o:['Coba sekali tidak apa','Say No to Drugs','Narkoba itu keren','Sesekali boleh'],a:1}
+        ]
+      },
+      {
+        id: 'pelecehan-seksual',
+        title: 'Pelecehan Seksual',
+        icon: 'hand',
+        color: 'from-pink-500 to-rose-600',
+        video: 'https://youtu.be/BplnGR6OAQw?si=U31S76dN5ApYN7gu',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Tindakan Pelecehan Seksual dan Cara Menghindarinya</h3>
+<p class="mb-3">Pelecehan seksual adalah segala bentuk perilaku yang bersifat seksual yang tidak diinginkan dan membuat korban merasa tidak nyaman, terancam, atau terhina.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Bentuk-Bentuk Pelecehan Seksual:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Sentuhan fisik yang tidak diinginkan</li>
+<li>Komentar atau lelucon bernuansa seksual</li>
+<li>Mengirim gambar/video tidak senonoh</li>
+<li>Memperlihatkan bagian tubuh yang tidak pantas</li>
+<li>Memaksa melakukan tindakan seksual</li>
+<li>Catcalling atau siulan yang mengganggu</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Menghindari dan Melindungi Diri:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Kenali batasan tubuhmu:</strong> Tidak ada yang boleh menyentuh area pribadimu</li>
+<li><strong>Berani bilang TIDAK:</strong> Tolak dengan tegas jika merasa tidak nyaman</li>
+<li><strong>Laporkan:</strong> Ceritakan kepada orang tua, guru, atau pihak berwenang</li>
+<li><strong>Hindari tempat sepi:</strong> Usahakan selalu ada teman atau orang dewasa di sekitar</li>
+<li><strong>Waspadai media sosial:</strong> Jangan bagikan foto/video pribadi</li>
+<li><strong>Percaya instingmu:</strong> Jika merasa tidak aman, segera pergi</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Yang Harus Dilakukan Jika Menjadi Korban:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Ini BUKAN salahmu</li>
+<li>Ceritakan kepada orang yang dipercaya</li>
+<li>Simpan bukti (screenshot, dll)</li>
+<li>Laporkan ke pihak berwajib</li>
+<li>Cari bantuan konseling</li>
+</ul>`,
+        quiz: [
+          {q:'Apa yang dimaksud pelecehan seksual?',o:['Bercanda biasa','Perilaku seksual yang tidak diinginkan','Bergandengan tangan','Berpelukan dengan izin'],a:1},
+          {q:'Mana yang termasuk pelecehan seksual?',o:['Jabat tangan','Sentuhan fisik yang tidak diinginkan','Melambaikan tangan','Menepuk bahu teman'],a:1},
+          {q:'Jika mengalami pelecehan, langkah pertama yang harus dilakukan...',o:['Diam saja','Menyalahkan diri sendiri','Ceritakan kepada orang dewasa yang dipercaya','Membalas pelaku'],a:2},
+          {q:'Area tubuh pribadi yang tidak boleh disentuh orang lain disebut...',o:['Area bermain','Area privat/pribadi','Area umum','Area bebas'],a:1},
+          {q:'Catcalling termasuk...',o:['Pujian biasa','Bentuk pelecehan seksual','Sapaan ramah','Hal yang wajar'],a:1},
+          {q:'Apa yang BUKAN cara melindungi diri?',o:['Berani bilang tidak','Diam dan menerima','Laporkan ke guru','Hindari tempat sepi'],a:1},
+          {q:'Jika teman bercerita menjadi korban pelecehan, kita harus...',o:['Menyalahkan teman','Mendengarkan dan membantu melapor','Menyebarkan ceritanya','Tidak percaya'],a:1},
+          {q:'Pelecehan seksual di media sosial contohnya...',o:['Mengirim tugas','Mengirim gambar tidak senonoh','Like foto','Komentar positif'],a:1},
+          {q:'Siapa saja yang bisa menjadi korban pelecehan seksual?',o:['Hanya perempuan','Hanya anak kecil','Siapa saja tanpa memandang jenis kelamin','Hanya orang dewasa'],a:2},
+          {q:'Korban pelecehan seksual sering merasa...',o:['Senang','Malu dan takut untuk melapor','Bangga','Tidak terpengaruh'],a:1},
+          {q:'Apa yang dimaksud consent (persetujuan)?',o:['Dipaksa setuju','Izin yang diberikan secara sadar dan sukarela','Diam berarti setuju','Tidak ada pilihan'],a:1},
+          {q:'Pelaku pelecehan seksual bisa...',o:['Hanya orang asing','Siapa saja termasuk orang yang dikenal','Hanya orang jahat','Hanya orang dewasa'],a:1},
+          {q:'Pelecehan seksual adalah salah siapa?',o:['Korban','Pelaku','Kedua-duanya','Orang tua korban'],a:1},
+          {q:'Lembaga yang menangani kasus kekerasan seksual pada anak...',o:['KPAI dan Komnas Perempuan','Bank Indonesia','Kementerian Keuangan','PLN'],a:0},
+          {q:'Apa pentingnya pendidikan seksual di sekolah?',o:['Tidak penting','Agar siswa tahu cara melindungi diri','Membuat siswa penasaran','Menambah PR'],a:1},
+          {q:'Grooming dalam konteks pelecehan adalah...',o:['Berdandan','Proses pendekatan pelaku untuk mendapat kepercayaan korban','Merawat hewan','Berkebun'],a:1},
+          {q:'Jika seseorang mengirim pesan tidak pantas, kita harus...',o:['Membalas','Blokir, screenshot, dan laporkan','Meneruskan ke teman','Membiarkan'],a:1},
+          {q:'Apa hak korban pelecehan seksual?',o:['Tidak ada hak','Mendapat perlindungan dan keadilan','Disalahkan','Dihukum'],a:1},
+          {q:'Body shaming termasuk bentuk...',o:['Pujian','Kekerasan verbal/pelecehan','Motivasi','Candaan biasa'],a:1},
+          {q:'Nomor layanan pengaduan kekerasan pada anak...',o:['911','119','129','110'],a:2}
+        ]
+      },
+      {
+        id: 'kepemimpinan',
+        title: 'Kepemimpinan yang Baik',
+        icon: 'crown',
+        color: 'from-emerald-400 to-emerald-600',
+        video: 'https://youtu.be/2CFQaWtWqH4?si=63hJfMbu8Kpeb5xj',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Cara Menjadi Pemimpin yang Baik</h3>
+<p class="mb-3">Kepemimpinan adalah kemampuan untuk mempengaruhi, mengarahkan, dan memotivasi orang lain untuk mencapai tujuan bersama. Setiap siswa memiliki potensi untuk menjadi pemimpin yang baik.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Sifat Pemimpin yang Baik:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Integritas:</strong> Jujur dan konsisten antara perkataan dan perbuatan</li>
+<li><strong>Bertanggung jawab:</strong> Berani mengambil keputusan dan menanggung konsekuensi</li>
+<li><strong>Empati:</strong> Memahami perasaan dan kebutuhan orang lain</li>
+<li><strong>Visioner:</strong> Memiliki pandangan jauh ke depan</li>
+<li><strong>Komunikatif:</strong> Mampu menyampaikan ide dengan jelas</li>
+<li><strong>Adil:</strong> Tidak memihak dan menghargai semua orang</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Mengembangkan Jiwa Kepemimpinan:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li>Aktif dalam organisasi sekolah (OSIS, pramuka, dll)</li>
+<li>Berani berbicara di depan umum</li>
+<li>Menjadi contoh yang baik bagi teman</li>
+<li>Belajar mendengarkan pendapat orang lain</li>
+<li>Mengambil inisiatif dalam kegiatan kelompok</li>
+<li>Belajar mengelola waktu dengan baik</li>
+<li>Membaca biografi pemimpin-pemimpin hebat</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tipe-Tipe Kepemimpinan:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li><strong>Demokratis:</strong> Mengajak musyawarah dalam pengambilan keputusan</li>
+<li><strong>Transformasional:</strong> Menginspirasi perubahan positif</li>
+<li><strong>Servant Leadership:</strong> Melayani dan mendahulukan kepentingan anggota</li>
+</ul>`,
+        quiz: [
+          {q:'Apa yang dimaksud kepemimpinan?',o:['Menyuruh orang lain','Kemampuan mempengaruhi dan memotivasi untuk tujuan bersama','Berkuasa atas orang lain','Menjadi bos'],a:1},
+          {q:'Sifat utama pemimpin yang baik adalah...',o:['Sombong','Integritas dan tanggung jawab','Otoriter','Pemarah'],a:1},
+          {q:'Kepemimpinan demokratis berarti...',o:['Memutuskan sendiri','Mengajak musyawarah','Mengikuti perintah atasan','Tidak peduli pendapat lain'],a:1},
+          {q:'Empati dalam kepemimpinan artinya...',o:['Lemah','Memahami perasaan orang lain','Selalu setuju','Tidak tegas'],a:1},
+          {q:'Cara mengembangkan jiwa kepemimpinan di sekolah...',o:['Diam di kelas','Aktif dalam organisasi','Tidak ikut kegiatan','Hanya belajar'],a:1},
+          {q:'Servant leadership adalah...',o:['Memimpin dengan keras','Melayani dan mendahulukan kepentingan anggota','Menjadi pelayan','Tidak memimpin'],a:1},
+          {q:'Pemimpin visioner berarti...',o:['Melihat masa lalu','Memiliki pandangan jauh ke depan','Tidak realistis','Bermimpi saja'],a:1},
+          {q:'Apa pentingnya komunikasi bagi pemimpin?',o:['Tidak penting','Mampu menyampaikan ide dengan jelas','Hanya untuk memerintah','Untuk berdebat'],a:1},
+          {q:'Pemimpin yang adil berarti...',o:['Memihak teman sendiri','Tidak memihak dan menghargai semua','Pilih kasih','Mengabaikan yang lemah'],a:1},
+          {q:'Apa yang harus dilakukan pemimpin saat mengambil keputusan?',o:['Tergesa-gesa','Mempertimbangkan dampak dan musyawarah','Ikut-ikutan','Tidak peduli konsekuensi'],a:1},
+          {q:'Inisiatif dalam kepemimpinan berarti...',o:['Menunggu diperintah','Berani memulai tanpa diminta','Meniru orang lain','Diam saja'],a:1},
+          {q:'Kepemimpinan transformasional bertujuan...',o:['Mempertahankan yang lama','Menginspirasi perubahan positif','Menghancurkan yang ada','Tidak berubah'],a:1},
+          {q:'Mengapa pemimpin harus bisa mendengarkan?',o:['Agar terlihat baik','Untuk memahami kebutuhan dan masalah anggota','Tidak perlu mendengarkan','Hanya formalitas'],a:1},
+          {q:'OSIS melatih siswa untuk...',o:['Bolos sekolah','Berorganisasi dan memimpin','Mendapat uang','Bebas dari pelajaran'],a:1},
+          {q:'Pemimpin yang baik menghadapi masalah dengan...',o:['Lari dari masalah','Mencari solusi bersama','Menyalahkan orang lain','Marah-marah'],a:1},
+          {q:'Apa yang membedakan pemimpin dengan bos?',o:['Pemimpin memerintah, bos membimbing','Pemimpin membimbing, bos memerintah','Sama saja','Tidak ada bedanya'],a:1},
+          {q:'Time management penting bagi pemimpin karena...',o:['Tidak penting','Agar semua tugas terselesaikan dengan baik','Agar terlihat sibuk','Untuk menghindari tugas'],a:1},
+          {q:'Delegasi tugas berarti...',o:['Membuang tanggung jawab','Membagi tugas sesuai kemampuan anggota','Menyuruh semua orang','Tidak bekerja'],a:1},
+          {q:'Pemimpin harus berani karena...',o:['Untuk menakuti orang','Untuk mengambil keputusan yang tepat','Untuk berkelahi','Untuk pamer'],a:1},
+          {q:'Teladan yang baik dari pemimpin contohnya...',o:['Datang terlambat','Disiplin dan jujur','Sering bolos','Suka bergosip'],a:1}
+        ]
+      },
+      {
+        id: 'tanggung-jawab',
+        title: 'Siswa Bertanggung Jawab',
+        icon: 'check-circle',
+        color: 'from-cyan-400 to-cyan-600',
+        video: 'https://www.youtube.com/embed/fmoor8DwqW4',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Menjadi Siswa yang Bertanggung Jawab</h3>
+<p class="mb-3">Tanggung jawab adalah kesadaran untuk melaksanakan tugas dan kewajiban dengan sebaik-baiknya serta siap menanggung konsekuensi dari setiap tindakan yang dilakukan.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Ciri-Ciri Siswa Bertanggung Jawab:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Mengerjakan tugas tepat waktu</li>
+<li>Jujur dalam ujian dan tugas</li>
+<li>Menjaga kebersihan kelas dan sekolah</li>
+<li>Hadir tepat waktu</li>
+<li>Menepati janji</li>
+<li>Berani mengakui kesalahan</li>
+<li>Menjaga barang milik sendiri dan orang lain</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tanggung Jawab Siswa:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Terhadap diri sendiri:</strong> Menjaga kesehatan, belajar dengan giat</li>
+<li><strong>Terhadap keluarga:</strong> Membantu orang tua, menjaga nama baik keluarga</li>
+<li><strong>Terhadap sekolah:</strong> Menaati peraturan, menjaga fasilitas</li>
+<li><strong>Terhadap masyarakat:</strong> Menjaga lingkungan, menghormati tetangga</li>
+<li><strong>Terhadap negara:</strong> Belajar untuk memajukan bangsa</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Cara Melatih Tanggung Jawab:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Buat jadwal belajar dan patuhi</li>
+<li>Catat semua tugas dan deadline</li>
+<li>Mulai dari hal-hal kecil</li>
+<li>Jangan menunda pekerjaan</li>
+<li>Evaluasi diri secara berkala</li>
+</ul>`,
+        quiz: [
+          {q:'Apa yang dimaksud tanggung jawab?',o:['Melakukan sesuka hati','Kesadaran melaksanakan tugas dan menanggung konsekuensi','Menyuruh orang lain','Menghindari tugas'],a:1},
+          {q:'Ciri siswa bertanggung jawab adalah...',o:['Sering terlambat','Mengerjakan tugas tepat waktu','Mencontek','Bolos sekolah'],a:1},
+          {q:'Tanggung jawab terhadap diri sendiri contohnya...',o:['Begadang setiap malam','Menjaga kesehatan dan belajar giat','Malas-malasan','Tidak peduli masa depan'],a:1},
+          {q:'Jika berbuat salah, siswa bertanggung jawab akan...',o:['Menyalahkan orang lain','Berani mengakui kesalahan','Bersembunyi','Berbohong'],a:1},
+          {q:'Tanggung jawab terhadap sekolah meliputi...',o:['Merusak fasilitas','Menaati peraturan dan menjaga fasilitas','Bolos sekolah','Membuat keributan'],a:1},
+          {q:'Cara melatih tanggung jawab adalah...',o:['Menunda pekerjaan','Buat jadwal dan patuhi','Tidak peduli deadline','Bergantung pada orang lain'],a:1},
+          {q:'Mengapa tanggung jawab penting bagi siswa?',o:['Tidak penting','Membentuk karakter dan kepercayaan diri','Agar dipuji','Untuk menghindari hukuman saja'],a:1},
+          {q:'Tanggung jawab terhadap keluarga contohnya...',o:['Membangkang','Membantu orang tua dan menjaga nama baik','Tidak peduli keluarga','Selalu meminta'],a:1},
+          {q:'Menepati janji adalah wujud tanggung jawab terhadap...',o:['Diri sendiri dan orang lain','Tidak ada','Guru saja','Pemerintah'],a:0},
+          {q:'Siswa yang jujur dalam ujian menunjukkan...',o:['Kebodohan','Tanggung jawab dan integritas','Kelemahan','Ketakutan'],a:1},
+          {q:'Apa akibat tidak bertanggung jawab?',o:['Dipuji','Kehilangan kepercayaan dan masalah menumpuk','Sukses','Banyak teman'],a:1},
+          {q:'Piket kelas melatih siswa untuk...',o:['Malas','Bertanggung jawab terhadap kebersihan','Bolos','Menyuruh orang lain'],a:1},
+          {q:'Deadline tugas harus...',o:['Diabaikan','Dipatuhi dan diselesaikan tepat waktu','Ditunda terus','Dikerjakan orang lain'],a:1},
+          {q:'Tanggung jawab terhadap lingkungan contohnya...',o:['Membuang sampah sembarangan','Menjaga kebersihan lingkungan','Merusak tanaman','Tidak peduli polusi'],a:1},
+          {q:'Evaluasi diri berguna untuk...',o:['Menyalahkan diri','Mengetahui kemajuan dan area perbaikan','Menyombongkan diri','Tidak ada gunanya'],a:1},
+          {q:'Siswa bertanggung jawab mengelola waktu dengan...',o:['Tidak ada jadwal','Membuat prioritas dan jadwal','Bermain terus','Tidur sepanjang hari'],a:1},
+          {q:'Menjaga barang milik orang lain termasuk tanggung jawab...',o:['Tidak termasuk','Sosial dan moral','Akademik','Fisik'],a:1},
+          {q:'Apa hubungan tanggung jawab dengan kemandirian?',o:['Tidak ada hubungan','Tanggung jawab membangun kemandirian','Saling bertentangan','Kemandirian menghilangkan tanggung jawab'],a:1},
+          {q:'Siswa yang proaktif berarti...',o:['Menunggu disuruh','Bertindak tanpa menunggu perintah','Malas','Tidak peduli'],a:1},
+          {q:'Tanggung jawab terhadap negara sebagai pelajar...',o:['Tidak ada','Belajar giat untuk memajukan bangsa','Meninggalkan negara','Tidak perlu'],a:1}
+        ]
+      },
+      {
+        id: 'tugas-pelajar',
+        title: 'Tugas Siswa sebagai Pelajar',
+        icon: 'book-open',
+        color: 'from-blue-400 to-indigo-600',
+        video: 'https://www.youtube.com/embed/y2X7c9SBER0',
+        content: `<h3 class="text-xl font-bold text-blue-800 mb-4">Tugas Siswa sebagai Pelajar di Sekolah</h3>
+<p class="mb-3">Sebagai pelajar, siswa memiliki tugas dan kewajiban yang harus dipenuhi untuk mencapai keberhasilan dalam pendidikan dan pembentukan karakter.</p>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tugas Utama Pelajar:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li><strong>Belajar:</strong> Menuntut ilmu dengan sungguh-sungguh</li>
+<li><strong>Disiplin:</strong> Menaati semua peraturan sekolah</li>
+<li><strong>Menghormati:</strong> Menghargai guru, staf, dan sesama siswa</li>
+<li><strong>Berpartisipasi:</strong> Aktif dalam kegiatan pembelajaran dan ekstrakurikuler</li>
+<li><strong>Menjaga:</strong> Merawat fasilitas dan lingkungan sekolah</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Hak dan Kewajiban Siswa:</h4>
+<ol class="list-decimal pl-5 space-y-1 mb-3">
+<li><strong>Hak:</strong> Mendapat pendidikan yang layak, perlakuan adil, fasilitas belajar</li>
+<li><strong>Kewajiban:</strong> Belajar, menaati aturan, menghormati guru, menjaga ketertiban</li>
+</ol>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Tips Sukses sebagai Pelajar:</h4>
+<ul class="list-disc pl-5 space-y-1 mb-3">
+<li>Buat target belajar yang realistis</li>
+<li>Aktif bertanya dan berdiskusi di kelas</li>
+<li>Kelola waktu antara belajar, bermain, dan istirahat</li>
+<li>Ikuti kegiatan yang mengembangkan potensi</li>
+<li>Jaga kesehatan fisik dan mental</li>
+<li>Bangun relasi positif dengan teman dan guru</li>
+</ul>
+<h4 class="font-bold text-blue-700 mt-4 mb-2">Etika di Sekolah:</h4>
+<ul class="list-disc pl-5 space-y-1">
+<li>Berpakaian rapi sesuai aturan</li>
+<li>Tidak membawa barang terlarang</li>
+<li>Menggunakan bahasa yang sopan</li>
+<li>Tidak mengganggu proses belajar mengajar</li>
+<li>Menjaga nama baik sekolah di manapun berada</li>
+</ul>`,
+        quiz: [
+          {q:'Tugas utama seorang pelajar adalah...',o:['Bermain','Belajar dan menuntut ilmu','Bersenang-senang','Tidur'],a:1},
+          {q:'Disiplin di sekolah meliputi...',o:['Datang sesuka hati','Menaati peraturan sekolah','Melanggar aturan','Bolos'],a:1},
+          {q:'Hak siswa di sekolah adalah...',o:['Berbuat sesuka hati','Mendapat pendidikan yang layak','Tidak mengerjakan tugas','Melanggar aturan'],a:1},
+          {q:'Kewajiban siswa terhadap guru adalah...',o:['Mengabaikan','Menghormati dan menghargai','Membantah','Tidak peduli'],a:1},
+          {q:'Aktif bertanya di kelas menunjukkan...',o:['Kebodohan','Semangat belajar dan rasa ingin tahu','Sok pintar','Mengganggu'],a:1},
+          {q:'Menjaga fasilitas sekolah adalah tanggung jawab...',o:['Hanya cleaning service','Semua warga sekolah','Hanya guru','Hanya kepala sekolah'],a:1},
+          {q:'Etika berpakaian di sekolah berarti...',o:['Pakai baju sesuka hati','Berpakaian rapi sesuai aturan','Tidak perlu seragam','Pakai baju mahal'],a:1},
+          {q:'Ekstrakurikuler bertujuan...',o:['Menambah beban','Mengembangkan potensi dan bakat','Mengurangi belajar','Bolos pelajaran'],a:1},
+          {q:'Manajemen waktu bagi pelajar meliputi...',o:['Main terus','Seimbang antara belajar, bermain, dan istirahat','Belajar 24 jam','Tidak ada jadwal'],a:1},
+          {q:'Siswa harus menjaga nama baik sekolah di...',o:['Hanya di sekolah','Di manapun berada','Hanya di rumah','Tidak perlu'],a:1},
+          {q:'Mengapa harus aktif dalam pembelajaran?',o:['Tidak perlu','Agar memahami materi dengan baik','Untuk pamer','Agar diperhatikan guru'],a:1},
+          {q:'Bahasa yang sopan di sekolah contohnya...',o:['Bahasa kasar','Menggunakan kata-kata yang baik dan santun','Membentak','Mengejek'],a:1},
+          {q:'Tidak membawa barang terlarang ke sekolah termasuk...',o:['Hal tidak penting','Kewajiban menaati peraturan','Hak siswa','Saran saja'],a:1},
+          {q:'Kerja kelompok melatih siswa untuk...',o:['Menyontek','Bekerja sama dan menghargai pendapat','Malas','Bergantung pada satu orang'],a:1},
+          {q:'Target belajar yang realistis berarti...',o:['Harus sempurna','Sesuai kemampuan dan dapat dicapai','Tidak perlu target','Asal-asalan'],a:1},
+          {q:'Relasi positif dengan teman berarti...',o:['Berkelahi','Saling mendukung dan menghargai','Memilih-milih teman','Bergosip'],a:1},
+          {q:'Peran siswa dalam menjaga ketertiban kelas...',o:['Tidak ada peran','Tidak gaduh dan mengikuti aturan kelas','Membuat keributan','Tidur di kelas'],a:1},
+          {q:'Kesehatan mental pelajar dijaga dengan...',o:['Tidak peduli','Curhat, istirahat cukup, dan hobi positif','Menyimpan masalah sendiri','Begadang terus'],a:1},
+          {q:'Siswa yang baik menghadapi kesulitan belajar dengan...',o:['Menyerah','Bertanya kepada guru dan belajar lebih giat','Mencontek','Bolos'],a:1},
+          {q:'Apa arti pendidikan karakter bagi pelajar?',o:['Tidak penting','Membentuk kepribadian yang baik dan bermoral','Hanya tambahan','Mengurangi waktu belajar'],a:1}
+        ]
+      }
+    ];
+
+    // ===== DATA SDK HANDLER =====
+    const dataHandler = {
+      onDataChanged(data) {
+        allData = data;
+        updateStats();
+        updateNilaiPage();
+      }
+    };
+
+    // ===== INIT =====
+    async function initApp() {
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (!initResult.isOk) {
+        console.error('Data SDK init failed');
+      }
+      // Record visit
+      recordVisit();
+      renderMateriCards();
+      lucide.createIcons();
+    }
+
+    async function recordVisit() {
+      const today = new Date().toISOString().split('T')[0];
+      if (allData.filter(d => d.type === 'visit').length >= 900) return;
+      const result = await window.dataSdk.create({
+        type: 'visit',
+        visitor_date: today,
+        quiz_topic: '',
+        quiz_score: 0,
+        student_name: '',
+        total_questions: 0
+      });
+    }
+
+    // ===== ELEMENT SDK =====
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const title = config.site_title || defaultConfig.site_title;
+        const welcome = config.welcome_text || defaultConfig.welcome_text;
+        const bg = config.background_color || defaultConfig.background_color;
+        const surface = config.surface_color || defaultConfig.surface_color;
+        const text = config.text_color || defaultConfig.text_color;
+        const primary = config.primary_action_color || defaultConfig.primary_action_color;
+        const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
+        const font = config.font_family || 'Plus Jakarta Sans';
+        const fontSize = config.font_size || 16;
+
+        document.getElementById('nav-title').textContent = title.includes('SMP') ? 'Agen Perubahan' : title;
+        document.getElementById('hero-title').textContent = welcome;
+        document.body.style.backgroundColor = bg;
+        document.body.style.color = text;
+        document.body.style.fontFamily = `${font}, Plus Jakarta Sans, sans-serif`;
+        document.body.style.fontSize = `${fontSize}px`;
+
+        document.querySelectorAll('.card-hover').forEach(el => {
+          el.style.backgroundColor = surface;
+        });
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+          { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || 'Plus Jakarta Sans', set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || 16, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['site_title', config.site_title || defaultConfig.site_title],
+        ['welcome_text', config.welcome_text || defaultConfig.welcome_text]
+      ])
+    });
+
+    initApp();
+
+    // ===== NAVIGATION =====
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      const el = document.getElementById('page-' + page);
+      if (el) { el.classList.remove('hidden'); el.classList.add('fade-in'); }
+      if (page === 'statistik') renderChart();
+      if (page === 'nilai') updateNilaiPage();
+      window.scrollTo(0, 0);
+    }
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.toggle('hidden');
+    });
+    function closeMobileNav() { document.getElementById('mobile-nav').classList.add('hidden'); }
+
+    // ===== MATERI CARDS =====
+    function renderMateriCards() {
+      const container = document.getElementById('materi-cards');
+      container.innerHTML = materiData.map((m, i) => `
+        <div class="card-hover bg-white border border-blue-100 rounded-xl p-5 cursor-pointer shadow-sm" onclick="openMateri(${i})">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br ${m.color} flex items-center justify-center mb-3">
+            <i data-lucide="${m.icon}" class="w-5 h-5 text-white"></i>
+          </div>
+          <h3 class="font-bold text-blue-800 text-sm">${m.title}</h3>
+          <p class="text-xs text-blue-400 mt-1">Materi + Quiz 20 Soal</p>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // ===== MATERI DETAIL =====
+    function openMateri(index) {
+      currentTopic = index;
+      const m = materiData[index];
+      document.getElementById('materi-content').innerHTML = `
+        <div class="fade-in">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center">
+              <i data-lucide="${m.icon}" class="w-6 h-6 text-white"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-blue-800">${m.title}</h2>
+          </div>
+          <div class="bg-white border border-blue-100 rounded-2xl p-6 mb-6 shadow-sm prose prose-blue max-w-none">
+            ${m.content}
+          </div>
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-6">
+            <h4 class="font-bold text-blue-800 mb-3 flex items-center gap-2"><i data-lucide="video" class="w-5 h-5"></i> Video Pembelajaran</h4>
+            <div class="aspect-video rounded-xl overflow-hidden bg-blue-200">
+              <iframe src="${m.video}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <button onclick="startQuiz(${index})" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2">
+            <i data-lucide="clipboard-list" class="w-5 h-5"></i> Mulai Quiz (20 Soal)
+          </button>
+        </div>
+      `;
+      showPage('materi');
+      lucide.createIcons();
+    }
+
+    function backToMateri() { openMateri(currentTopic); }
+
+    // ===== QUIZ =====
+    let quizState = { current: 0, answers: [], topic: 0 };
+
+    function startQuiz(topicIndex) {
+      quizState = { current: 0, answers: new Array(20).fill(-1), topic: topicIndex };
+      renderQuizQuestion();
+      showPage('quiz');
+    }
+
+    function renderQuizQuestion() {
+      const m = materiData[quizState.topic];
+      const q = m.quiz[quizState.current];
+      const container = document.getElementById('quiz-container');
+      const selected = quizState.answers[quizState.current];
+      container.innerHTML = `
+        <div class="fade-in">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm font-medium text-blue-500">Soal ${quizState.current + 1} / 20</span>
+            <span class="text-sm font-medium text-blue-800">${m.title}</span>
+          </div>
+          <div class="w-full bg-blue-100 rounded-full h-2 mb-6">
+            <div class="bg-blue-600 h-2 rounded-full transition-all" style="width:${((quizState.current + 1) / 20) * 100}%"></div>
+          </div>
+          <div class="bg-white border border-blue-100 rounded-2xl p-6 mb-6 shadow-sm">
+            <p class="font-semibold text-blue-900 text-lg">${q.q}</p>
+          </div>
+          <div class="space-y-3">
+            ${q.o.map((opt, i) => `
+              <button onclick="selectAnswer(${i})" class="quiz-option w-full text-left p-4 rounded-xl border-2 ${selected === i ? 'selected' : 'border-blue-100 bg-white'} font-medium text-sm">
+                <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs mr-3">${String.fromCharCode(65 + i)}</span>
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+          <div class="flex gap-3 mt-6">
+            ${quizState.current > 0 ? '<button onclick="prevQuestion()" class="flex-1 py-3 rounded-xl border-2 border-blue-200 text-blue-700 font-medium hover:bg-blue-50 transition">Sebelumnya</button>' : ''}
+            ${quizState.current < 19 ? '<button onclick="nextQuestion()" class="flex-1 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition">Selanjutnya</button>' : '<button onclick="finishQuiz()" class="flex-1 py-3 rounded-xl bg-green-600 text-white font-medium hover:bg-green-700 transition">Selesai</button>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectAnswer(i) { quizState.answers[quizState.current] = i; renderQuizQuestion(); }
+    function nextQuestion() { if (quizState.current < 19) { quizState.current++; renderQuizQuestion(); } }
+    function prevQuestion() { if (quizState.current > 0) { quizState.current--; renderQuizQuestion(); } }
+
+    async function finishQuiz() {
+      const m = materiData[quizState.topic];
+      let score = 0;
+      quizState.answers.forEach((ans, i) => { if (ans === m.quiz[i].a) score++; });
+      const percentage = Math.round((score / 20) * 100);
+
+      // Save score
+      const studentName = 'Siswa_' + Date.now().toString(36);
+      const result = await window.dataSdk.create({
+        type: 'score',
+        visitor_date: new Date().toISOString(),
+        quiz_topic: m.title,
+        quiz_score: percentage,
+        student_name: studentName,
+        total_questions: 20
+      });
+
+      // Show result
+      const container = document.getElementById('quiz-container');
+      const emoji = percentage >= 80 ? '🎉' : percentage >= 60 ? '👍' : '💪';
+      container.innerHTML = `
+        <div class="fade-in text-center py-8">
+          <div class="text-6xl mb-4">${emoji}</div>
+          <h3 class="text-2xl font-bold text-blue-800 mb-2">Quiz Selesai!</h3>
+          <p class="text-blue-500 mb-4">${m.title}</p>
+          <div class="inline-flex items-center justify-center w-32 h-32 rounded-full border-4 ${percentage >= 80 ? 'border-green-400 text-green-600' : percentage >= 60 ? 'border-yellow-400 text-yellow-600' : 'border-red-400 text-red-600'} mb-4">
+            <span class="text-4xl font-bold">${percentage}</span>
+          </div>
+          <p class="text-sm text-blue-600 mb-2">Benar: ${score} / 20</p>
+          <p class="text-sm text-blue-400 mb-8">${percentage >= 80 ? 'Luar biasa! Kamu sangat memahami materi ini!' : percentage >= 60 ? 'Bagus! Terus tingkatkan pemahamanmu!' : 'Jangan menyerah! Pelajari kembali materinya ya!'}</p>
+          <div class="flex gap-3 justify-center">
+            <button onclick="openMateri(${quizState.topic})" class="px-6 py-3 rounded-xl border-2 border-blue-200 text-blue-700 font-medium hover:bg-blue-50">Pelajari Lagi</button>
+            <button onclick="showPage('home')" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700">Kembali</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== STATISTICS =====
+    function updateStats() {
+      const visits = allData.filter(d => d.type === 'visit');
+      const today = new Date().toISOString().split('T')[0];
+      const thisMonth = today.substring(0, 7);
+
+      document.getElementById('stat-total').textContent = visits.length;
+      document.getElementById('stat-month').textContent = visits.filter(v => v.visitor_date && v.visitor_date.startsWith(thisMonth)).length;
+      document.getElementById('stat-today').textContent = visits.filter(v => v.visitor_date === today).length;
+    }
+
+    function setChartType(type) {
+      chartType = type;
+      document.getElementById('btn-bar').className = `px-4 py-2 rounded-lg text-sm font-medium ${type === 'bar' ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700'}`;
+      document.getElementById('btn-line').className = `px-4 py-2 rounded-lg text-sm font-medium ${type === 'line' ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700'}`;
+      renderChart();
+    }
+
+    function setChartPeriod(period) {
+      chartPeriod = period;
+      ['year','month','day'].forEach(p => {
+        document.getElementById('btn-' + p).className = `px-3 py-1.5 rounded-lg text-xs font-medium ${p === period ? 'bg-blue-200 text-blue-800' : 'bg-blue-100 text-blue-700'}`;
+      });
+      renderChart();
+    }
+
+    function renderChart() {
+      const svg = document.getElementById('chart-svg');
+      const visits = allData.filter(d => d.type === 'visit');
+      let labels = [], values = [];
+
+      if (chartPeriod === 'year') {
+        const years = {};
+        visits.forEach(v => { if (v.visitor_date) { const y = v.visitor_date.substring(0, 4); years[y] = (years[y] || 0) + 1; } });
+        const sortedYears = Object.keys(years).sort();
+        if (sortedYears.length === 0) { const cy = new Date().getFullYear(); for (let i = cy - 2; i <= cy; i++) { labels.push(String(i)); values.push(years[i] || 0); } }
+        else { sortedYears.forEach(y => { labels.push(y); values.push(years[y]); }); }
+      } else if (chartPeriod === 'month') {
+        const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+        const cy = new Date().getFullYear();
+        for (let i = 0; i < 12; i++) {
+          labels.push(months[i]);
+          const key = `${cy}-${String(i + 1).padStart(2, '0')}`;
+          values.push(visits.filter(v => v.visitor_date && v.visitor_date.startsWith(key)).length);
+        }
+      } else {
+        const days = ['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+        const today = new Date();
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date(today); d.setDate(d.getDate() - i);
+          const key = d.toISOString().split('T')[0];
+          labels.push(days[d.getDay() === 0 ? 6 : d.getDay() - 1]);
+          values.push(visits.filter(v => v.visitor_date === key).length);
+        }
+      }
+
+      const w = svg.clientWidth || 700;
+      const h = 260;
+      const padding = { top: 20, right: 20, bottom: 40, left: 40 };
+      const chartW = w - padding.left - padding.right;
+      const chartH = h - padding.top - padding.bottom;
+      const maxVal = Math.max(...values, 1);
+
+      let html = '';
+      // Grid
+      for (let i = 0; i <= 4; i++) {
+        const y = padding.top + (chartH / 4) * i;
+        html += `<line x1="${padding.left}" y1="${y}" x2="${w - padding.right}" y2="${y}" stroke="#dbeafe" stroke-width="1"/>`;
+        html += `<text x="${padding.left - 8}" y="${y + 4}" text-anchor="end" fill="#6b7280" font-size="10">${Math.round(maxVal - (maxVal / 4) * i)}</text>`;
+      }
+
+      const barW = chartW / labels.length;
+
+      if (chartType === 'bar') {
+        labels.forEach((label, i) => {
+          const x = padding.left + barW * i + barW * 0.2;
+          const barHeight = (values[i] / maxVal) * chartH;
+          const y = padding.top + chartH - barHeight;
+          html += `<rect x="${x}" y="${y}" width="${barW * 0.6}" height="${barHeight}" fill="#3b82f6" rx="4" class="stat-bar"/>`;
+          html += `<text x="${padding.left + barW * i + barW / 2}" y="${h - 10}" text-anchor="middle" fill="#6b7280" font-size="10">${label}</text>`;
+          if (values[i] > 0) html += `<text x="${padding.left + barW * i + barW / 2}" y="${y - 5}" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">${values[i]}</text>`;
+        });
+      } else {
+        let points = [];
+        labels.forEach((label, i) => {
+          const x = padding.left + barW * i + barW / 2;
+          const y = padding.top + chartH - (values[i] / maxVal) * chartH;
+          points.push(`${x},${y}`);
+          html += `<text x="${x}" y="${h - 10}" text-anchor="middle" fill="#6b7280" font-size="10">${label}</text>`;
+        });
+        // Area
+        html += `<polygon points="${padding.left + barW / 2},${padding.top + chartH} ${points.join(' ')} ${padding.left + barW * (labels.length - 1) + barW / 2},${padding.top + chartH}" fill="rgba(59,130,246,0.1)"/>`;
+        html += `<polyline points="${points.join(' ')}" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+        points.forEach((p, i) => {
+          const [x, y] = p.split(',');
+          html += `<circle cx="${x}" cy="${y}" r="4" fill="#2563eb" class="line-point"/>`;
+          if (values[i] > 0) html += `<text x="${x}" y="${y - 10}" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">${values[i]}</text>`;
+        });
+      }
+
+      svg.innerHTML = html;
+    }
+
+    // ===== NILAI PAGE =====
+    function updateNilaiPage() {
+      const scores = allData.filter(d => d.type === 'score').sort((a, b) => (b.visitor_date || '').localeCompare(a.visitor_date || ''));
+      const container = document.getElementById('nilai-list');
+      const empty = document.getElementById('nilai-empty');
+
+      if (scores.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      container.innerHTML = scores.map(s => {
+        const pct = s.quiz_score || 0;
+        const color = pct >= 80 ? 'green' : pct >= 60 ? 'yellow' : 'red';
+        const date = s.visitor_date ? new Date(s.visitor_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+        return `
+          <div class="flex items-center gap-4 bg-white border border-blue-100 rounded-xl p-4 shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-${color}-100 flex items-center justify-center">
+              <span class="text-${color}-600 font-bold text-sm">${pct}%</span>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-blue-800 text-sm">${s.quiz_topic || 'Quiz'}</p>
+              <p class="text-xs text-blue-400">${date}</p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs text-blue-500">${Math.round(pct * 20 / 100)} / 20 benar</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fa14c3cd78aab67',t:'MTc3ODUwMzcwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ </html>        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
          <i data-lucide="lightbulb" class="w-8 h-8 text-white"></i>
         </div>
         <h3 class="font-bold text-blue-800 text-sm">Inovasi</h3>
